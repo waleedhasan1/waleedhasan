@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CTA Test</title>
+</head>
+<body>
+    <h1>CTA API</h1>
+    <button onclick="test()">Get Trains</button>
+    <pre id="output"></pre>
+
+    <script>
+        function test() {
+            // Exact format from documentation
+            const url = 'http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=017acdd6a96947089c23ead6d6a5ccd0&max=1&mapid=40350';
+            
+            fetch(url)
+                .then(r => r.text())
+                .then(data => {
+                    document.getElementById('output').textContent = data;
+                })
+                .catch(err => {
+                    document.getElementById('output').textContent = 'Error: ' + err.message;
+                });
+        }
+    </script>
+</body>
+</html>
