@@ -2,12 +2,28 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-export default function PaintAppInline() {
+interface DrawAction {
+  id: string;
+  type: 'draw' | 'fill' | 'clear';
+  x?: number;
+  y?: number;
+  prevX?: number;
+  prevY?: number;
+  color?: string;
+  size?: number;
+  tool?: string;
+  fillX?: number;
+  fillY?: number;
+  timestamp: number;
+}
+
+export default function SharedPaintAppInline() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [currentColor, setCurrentColor] = useState('#000000');
   const [currentTool, setCurrentTool] = useState<'pencil' | 'brush' | 'eraser' | 'fill'>('pencil');
   const [brushSize, setBrushSize] = useState(2);
+  const [lastSync, setLastSync] = useState(0);
 
   const colors = [
     '#000000', '#FFFFFF', '#808080', '#C0C0C0',
@@ -16,6 +32,7 @@ export default function PaintAppInline() {
     '#0000FF', '#000080', '#FF00FF', '#800080'
   ];
 
+  // Initialize canvas
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -26,25 +43,143 @@ export default function PaintAppInline() {
     // Fill with white background
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Load initial canvas state
+    loadCanvas();
+    
+    // Poll for updates every 2 seconds
+    const interval = setInterval(fetchUpdates, 2000);
+    
+    return () => clearInterval(interval);
   }, []);
+
+  const loadCanvas = async () => {
+    try {
+      const response = await fetch('/api/paint');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.imageData) {
+          const canvas = canvasRef.current;
+          if (!canvas) return;
+          
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+          
+          const img = new Image();
+          img.onload = () => {
+            ctx.drawImage(img, 0, 0);
+          };
+          img.src = data.imageData;
+          
+          setLastSync(data.timestamp || Date.now());
+        }
+      }
+    } catch (err) {
+      console.error('Error loading canvas:', err);
+    }
+  };
+
+  const fetchUpdates = async () => {
+    try {
+      const response = await fetch(`/api/paint?since=${lastSync}`);
+      if (response.ok) {
+        const data = await response.json();
+        
+        if (data.actions && data.actions.length > 0) {
+          const canvas = canvasRef.current;
+          if (!canvas) return;
+          
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+          
+          // Apply all new actions
+          data.actions.forEach((action: DrawAction) => {
+            if (action.type === 'clear') {
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else if (action.type === 'fill' && action.fillX !== undefined && action.fillY !== undefined) {
+              floodFillAt(action.fillX, action.fillY, action.color || '#000000');
+            } else if (action.type === 'draw' && action.prevX !== undefined && action.prevY !== undefined) {
+              ctx.strokeStyle = action.color || '#000000';
+              ctx.lineWidth = action.size || 2;
+              ctx.lineCap = 'round';
+              ctx.lineJoin = 'round';
+              ctx.beginPath();
+              ctx.moveTo(action.prevX, action.prevY);
+              ctx.lineTo(action.x || action.prevX, action.y || action.prevY);
+              ctx.stroke();
+            }
+          });
+          
+          setLastSync(data.timestamp);
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching updates:', err);
+    }
+  };
+
+  const sendAction = async (action: DrawAction) => {
+    try {
+      await fetch('/api/paint', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action })
+      });
+    } catch (err) {
+      console.error('Error sending action:', err);
+    }
+  };
+
+  const saveCanvas = async () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const imageData = canvas.toDataURL('image/png');
+    
+    try {
+      await fetch('/api/paint', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageData })
+      });
+    } catch (err) {
+      console.error('Error saving canvas:', err);
+    }
+  };
+
+  let lastX = 0;
+  let lastY = 0;
 
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = Math.floor(e.clientX - rect.left);
+    const y = Math.floor(e.clientY - rect.top);
+    
+    lastX = x;
+    lastY = y;
+    
+    if (currentTool === 'fill') {
+      floodFillAt(x, y, currentColor);
+      sendAction({
+        id: Date.now().toString() + Math.random(),
+        type: 'fill',
+        fillX: x,
+        fillY: y,
+        color: currentColor,
+        timestamp: Date.now()
+      });
+      saveCanvas();
+      return;
+    }
     
     setIsDrawing(true);
     
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    
-    if (currentTool === 'fill') {
-      floodFill(x, y);
-      return;
-    }
     
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -57,26 +192,49 @@ export default function PaintAppInline() {
     if (!canvas) return;
     
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = Math.floor(e.clientX - rect.left);
+    const y = Math.floor(e.clientY - rect.top);
     
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
-    ctx.strokeStyle = currentTool === 'eraser' ? '#FFFFFF' : currentColor;
-    ctx.lineWidth = currentTool === 'brush' ? brushSize * 2 : brushSize;
+    const drawColor = currentTool === 'eraser' ? '#FFFFFF' : currentColor;
+    const drawSize = currentTool === 'brush' ? brushSize * 2 : brushSize;
+    
+    ctx.strokeStyle = drawColor;
+    ctx.lineWidth = drawSize;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     
     ctx.lineTo(x, y);
     ctx.stroke();
+    
+    // Send action to server
+    sendAction({
+      id: Date.now().toString() + Math.random(),
+      type: 'draw',
+      x,
+      y,
+      prevX: lastX,
+      prevY: lastY,
+      color: drawColor,
+      size: drawSize,
+      tool: currentTool,
+      timestamp: Date.now()
+    });
+    
+    lastX = x;
+    lastY = y;
   };
 
   const stopDrawing = () => {
-    setIsDrawing(false);
+    if (isDrawing) {
+      setIsDrawing(false);
+      saveCanvas();
+    }
   };
 
-  const floodFill = (startX: number, startY: number) => {
+  const floodFillAt = (startX: number, startY: number, fillColorHex: string) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     
@@ -85,7 +243,7 @@ export default function PaintAppInline() {
     
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const targetColor = getPixelColor(imageData, startX, startY);
-    const fillColor = hexToRgb(currentColor);
+    const fillColor = hexToRgb(fillColorHex);
     
     if (colorsMatch(targetColor, fillColor)) return;
     
@@ -151,6 +309,14 @@ export default function PaintAppInline() {
     
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    sendAction({
+      id: Date.now().toString() + Math.random(),
+      type: 'clear',
+      timestamp: Date.now()
+    });
+    
+    saveCanvas();
   };
 
   return (
@@ -241,7 +407,7 @@ export default function PaintAppInline() {
           <input
             type="range"
             min="1"
-            max="20"
+            max="50"
             value={brushSize}
             onChange={(e) => setBrushSize(Number(e.target.value))}
             style={{ width: 60 }}
@@ -312,6 +478,19 @@ export default function PaintAppInline() {
         </div>
       </div>
 
+      {/* Shared Canvas Notice */}
+      <div style={{
+        background: '#FFFF00',
+        border: '2px outset #DFDFDF',
+        padding: 8,
+        marginBottom: 8,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        boxShadow: '2px 2px 0 rgba(0,0,0,0.3)'
+      }}>
+        🌐 SHARED CANVAS - Everyone can draw together!
+      </div>
+
       {/* Canvas */}
       <div style={{
         background: '#C0C0C0',
@@ -323,7 +502,7 @@ export default function PaintAppInline() {
         <canvas
           ref={canvasRef}
           width={800}
-          height={500}
+          height={450}
           onMouseDown={startDrawing}
           onMouseMove={draw}
           onMouseUp={stopDrawing}

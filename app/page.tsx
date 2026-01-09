@@ -20,7 +20,7 @@ const AlbumLeaderboardInline = dynamic(() => import('./components/AlbumLeaderboa
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading leaderboard...</div>
 })
 
-const PaintAppInline = dynamic(() => import('./components/PaintAppInline'), {
+const PaintAppInline = dynamic(() => import('./components/SharedPaintAppInline'), {
   ssr: false,
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading paint...</div>
 })
