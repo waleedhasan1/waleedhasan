@@ -10,9 +10,24 @@ const MapComponentInline = dynamic(() => import('./components/MapComponentInline
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading map...</div>
 })
 
-const AlbumRankerInline = dynamic(() => import('./components/AlbumRankerInline'), {
+const AlbumBattleInline = dynamic(() => import('./components/AlbumBattleInline'), {
   ssr: false,
-  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading album ranker...</div>
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading album battle...</div>
+})
+
+const AlbumLeaderboardInline = dynamic(() => import('./components/AlbumLeaderboardInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading leaderboard...</div>
+})
+
+const PaintAppInline = dynamic(() => import('./components/PaintAppInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading paint...</div>
+})
+
+const ChatAppInline = dynamic(() => import('./components/ChatAppInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading chat...</div>
 })
 
 interface Window {
@@ -49,6 +64,7 @@ export default function Portfolio() {
   const openWindow = (windowId: string) => {
     if (!openWindows.includes(windowId)) {
       setOpenWindows([...openWindows, windowId])
+      setMinimizedWindows(minimizedWindows.filter(id => id !== windowId))
     }
   }
 
@@ -104,33 +120,108 @@ export default function Portfolio() {
   const windows: Record<string, Window> = {
     about: {
       title: 'About Me',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect fill='%234A90E2' width='48' height='48'/%3E%3Cpath fill='%23FFF' d='M24 8c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm0 28c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12zm-2-18h4v2h-4zm0 4h4v10h-4z'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%230000AA' width='32' height='32'/%3E%3Crect fill='%23FFF' x='8' y='8' width='16' height='16'/%3E%3Crect fill='%230000AA' x='12' y='10' width='8' height='2'/%3E%3Crect fill='%230000AA' x='12' y='14' width='8' height='2'/%3E%3Crect fill='%230000AA' x='12' y='18' width='8' height='4'/%3E%3C/svg%3E",
       pos: { top: 100, left: 100 },
-      size: { width: 500 },
+      size: { width: 500, height: 600 },
       content: (
-        <>
-          <div style={{ textAlign: 'center', marginBottom: 24 }}>
-            <img src="/profilepic.png" alt="Waleed Hasan" style={{ width: 150, height: 150, objectFit: 'cover', border: '3px solid #4A90E2', boxShadow: '0 4px 8px rgba(0,0,0,0.3)' }} />
+        <div style={{ fontFamily: 'Perfect DOS VGA 437, monospace', fontSize: 16, color: '#000', background: '#008080', padding: 16, letterSpacing: '0.5px', height: '100%', overflowY: 'auto' }}>
+          <div style={{ 
+            textAlign: 'center', 
+            marginBottom: 16,
+            background: '#C0C0C0',
+            border: '2px outset #DFDFDF',
+            padding: 12,
+            boxShadow: '2px 2px 0 rgba(0,0,0,0.3)'
+          }}>
+            <img 
+              src="/profilepic.png" 
+              alt="Waleed Hasan" 
+              style={{ 
+                width: 150, 
+                height: 150, 
+                objectFit: 'cover', 
+                border: '2px solid #808080', 
+                boxShadow: '2px 2px 0 rgba(0,0,0,0.5)' 
+              }} 
+            />
           </div>
-          <h2>👋 Hi! My name is Waleed Hasan, Thank you for visiting my Page!</h2>
-          <p>I am a Developer based out of Chicago. I really like cities and transit, and like making projects that show off how transit works in cities and how transit affects cities through different metrics, I also like making music!</p>
-          <h3>Background</h3>
-          <p>I recently graduated from the University of Illinois at Chicago, there I have found a love for statistics and data, as well as helping out with the newspaper and radio from time to time. Math is Music!</p>
-          <h3>Things I Have Done</h3>
-          <ul>
-            <li>Helped my friends at Kaleida health automate a pump report system, allowing a weekly meeting to be removed, saving over 50 staff members hours of time</li>
-            <li>Helped my friends at the Electronic Visualization Facility create automated data collection, sorting, cleaning system, that scraped google scholar pages of researchers, allowing for automatic bias detection</li>
-            <li>Helped my friends at the Bonfire Newspaper create an online polling and data tracking system</li>
-            <li>Helped my friends at Charred Fork set up their initial website for their lovely bbq restaurant</li>
-          </ul>
-          <h3>Fun Facts</h3>
-          <p>I really enjoy music, music software, and music tech! Late on a saturday night you can find me haggling for microphones on facebook marketplace.</p>
-        </>
+          
+          <div style={{ 
+            background: '#C0C0C0',
+            border: '2px outset #DFDFDF',
+            padding: 16,
+            marginBottom: 12,
+            boxShadow: '2px 2px 0 rgba(0,0,0,0.3)'
+          }}>
+            <div style={{
+              background: '#000080',
+              color: 'white',
+              padding: '6px 8px',
+              marginBottom: 12,
+              fontWeight: 'bold',
+              fontSize: 18,
+              letterSpacing: '1px'
+            }}>
+              👋 Welcome!
+            </div>
+            <p style={{ margin: 0, lineHeight: '1.8', color: '#000' }}>
+              Hi! My name is Waleed Hasan, Thank you for visiting my Page! I am a Developer based out of Chicago. I really like cities and transit, and like making projects that show off how transit works in cities and how transit affects cities through different metrics, I also like making music!
+            </p>
+          </div>
+
+          <div style={{ 
+            background: '#C0C0C0',
+            border: '2px outset #DFDFDF',
+            padding: 16,
+            marginBottom: 12,
+            boxShadow: '2px 2px 0 rgba(0,0,0,0.3)'
+          }}>
+            <div style={{
+              background: '#000080',
+              color: 'white',
+              padding: '6px 8px',
+              marginBottom: 12,
+              fontWeight: 'bold',
+              fontSize: 18,
+              letterSpacing: '1px'
+            }}>
+              Background
+            </div>
+            <p style={{ margin: 0, lineHeight: '1.8', color: '#000' }}>
+              I recently graduated from the University of Illinois at Chicago, there I have found a love for statistics and data, as well as helping out with the newspaper and radio from time to time. Math is Music!
+            </p>
+          </div>
+
+          <div style={{ 
+            background: '#C0C0C0',
+            border: '2px outset #DFDFDF',
+            padding: 16,
+            boxShadow: '2px 2px 0 rgba(0,0,0,0.3)'
+          }}>
+            <div style={{
+              background: '#000080',
+              color: 'white',
+              padding: '6px 8px',
+              marginBottom: 12,
+              fontWeight: 'bold',
+              fontSize: 18,
+              letterSpacing: '1px'
+            }}>
+              Things I Have Done
+            </div>
+            <ul style={{ margin: '0', paddingLeft: 24, lineHeight: '2', color: '#000' }}>
+              <li style={{ marginBottom: 10 }}>Helped my friends at Kaleida health automate a pump report system, allowing a weekly meeting to be removed, saving over 50 staff members hours of time</li>
+              <li style={{ marginBottom: 10 }}>Helped my friends at the Electronic Visualization Facility create automated data collection, sorting, cleaning system, that scraped google scholar pages of researchers, allowing for automatic bias detection</li>
+              <li style={{ marginBottom: 10 }}>Helped my friends at the Bonfire Newspaper create an online polling and data tracking system</li>
+              <li style={{ marginBottom: 10 }}>Helped my friends at Charred Fork set up their initial website for their lovely bbq restaurant</li>
+            </ul>
+          </div>
+        </div>
       )
     },
     ctamap: {
       title: 'CTA Train Map',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect fill='%230053EE' width='48' height='48'/%3E%3Cpath fill='%23FFF' d='M24 8c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm0 28c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z'/%3E%3Cpath fill='%23FFF' d='M24 14l-6 10h4v6l6-10h-4z'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%230000AA' width='32' height='32'/%3E%3Crect fill='%23FFF' x='6' y='10' width='20' height='12'/%3E%3Crect fill='%230000AA' x='10' y='14' width='4' height='4'/%3E%3Crect fill='%230000AA' x='18' y='14' width='4' height='4'/%3E%3Crect fill='%230000AA' x='8' y='24' width='2' height='2'/%3E%3Crect fill='%230000AA' x='22' y='24' width='2' height='2'/%3E%3C/svg%3E",
       pos: { top: 50, left: 100 },
       size: { width: 1000, height: 700 },
       content: (
@@ -139,20 +230,53 @@ export default function Portfolio() {
         </div>
       )
     },
-    albumranker: {
+    albumbattle: {
       title: 'Album Ranker',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect fill='%239333EA' width='48' height='48'/%3E%3Cpath fill='%23FFF' d='M24 8c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.2-16-16-16zm0 28c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z'/%3E%3Cpath fill='%23FFF' d='M24 18l-4 8h3v4l5-8h-3z'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23800080' width='32' height='32'/%3E%3Crect fill='%23FFF' x='8' y='8' width='16' height='16'/%3E%3Ccircle fill='%23800080' cx='16' cy='16' r='5'/%3E%3Ccircle fill='%23FFF' cx='16' cy='16' r='2'/%3E%3C/svg%3E",
       pos: { top: 80, left: 150 },
       size: { width: 900, height: 650 },
       content: (
         <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
-          <AlbumRankerInline />
+          <AlbumBattleInline openLeaderboard={() => openWindow('leaderboard')} />
+        </div>
+      )
+    },
+    leaderboard: {
+      title: 'Album Leaderboard',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23FFAA00' width='32' height='32'/%3E%3Crect fill='%23FFD700' x='12' y='6' width='8' height='4'/%3E%3Cpath fill='%23FFD700' d='M14 10 L16 6 L18 10 Z'/%3E%3Crect fill='%23FFF' x='6' y='16' width='20' height='10'/%3E%3Crect fill='%23C0C0C0' x='4' y='22' width='4' height='4'/%3E%3Crect fill='%23C0C0C0' x='24' y='22' width='4' height='4'/%3E%3C/svg%3E",
+      pos: { top: 110, left: 200 },
+      size: { width: 900, height: 650 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <AlbumLeaderboardInline openBattle={() => openWindow('albumbattle')} />
+        </div>
+      )
+    },
+    paint: {
+      title: 'Paint',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23FF1493' width='32' height='32'/%3E%3Crect fill='%23FFF' x='8' y='4' width='4' height='16'/%3E%3Crect fill='%23FFF' x='12' y='6' width='2' height='12'/%3E%3Crect fill='%23FFF' x='6' y='20' width='20' height='8'/%3E%3Crect fill='%23FF1493' x='10' y='22' width='12' height='4'/%3E%3C/svg%3E",
+      pos: { top: 60, left: 250 },
+      size: { width: 900, height: 700 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <PaintAppInline />
+        </div>
+      )
+    },
+    chat: {
+      title: 'Chat Room',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2300AAAA' width='32' height='32'/%3E%3Crect fill='%23FFF' x='4' y='6' width='24' height='16'/%3E%3Cpath fill='%23FFF' d='M12 22 L16 26 L20 22 Z'/%3E%3Crect fill='%2300AAAA' x='8' y='10' width='16' height='2'/%3E%3Crect fill='%2300AAAA' x='8' y='14' width='12' height='2'/%3E%3C/svg%3E",
+      pos: { top: 80, left: 300 },
+      size: { width: 600, height: 650 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <ChatAppInline />
         </div>
       )
     },
     projects: {
       title: 'My Projects',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect fill='%23F39C12' width='48' height='48'/%3E%3Cpath fill='%23FFF' d='M8 8h32v6H8zm0 10h32v22H8z'/%3E%3Cpath fill='%23F39C12' d='M12 22h24v2H12zm0 4h24v2H12zm0 4h18v2H12z'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23FF8800' width='32' height='32'/%3E%3Crect fill='%23FFDD00' x='6' y='6' width='20' height='4'/%3E%3Crect fill='%23FFF' x='6' y='12' width='20' height='14'/%3E%3Crect fill='%23FF8800' x='10' y='16' width='12' height='2'/%3E%3Crect fill='%23FF8800' x='10' y='20' width='12' height='2'/%3E%3C/svg%3E",
       pos: { top: 120, left: 120 },
       size: { width: 600, height: 500 },
       content: (
@@ -168,12 +292,13 @@ export default function Portfolio() {
               <span className="skill-tag">CTA API</span>
             </div>
           </div>
-          <div className="project-card">
-            <h4>Project Name 2</h4>
-            <p>An innovative solution for [problem]. Features include [key features].</p>
+          <div className="project-card" onClick={() => openWindow('albumbattle')} style={{ cursor: 'pointer' }}>
+            <h4>Album Ranker</h4>
+            <p>Battle your favorite albums and see which ones rank highest using ELO ratings!</p>
             <div style={{ marginTop: 8 }}>
-              <span className="skill-tag">Python</span>
-              <span className="skill-tag">Django</span>
+              <span className="skill-tag">Next.js</span>
+              <span className="skill-tag">React</span>
+              <span className="skill-tag">ELO Algorithm</span>
               <span className="skill-tag">PostgreSQL</span>
             </div>
           </div>
@@ -191,7 +316,7 @@ export default function Portfolio() {
     },
     skills: {
       title: 'Skills & Technologies',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect fill='%2327AE60' width='48' height='48'/%3E%3Cpath fill='%23FFF' d='M12 12h24v4H12zm0 8h24v4H12zm0 8h16v4H12z'/%3E%3Cpath fill='%2327AE60' d='M34 30l6-6-6-6z'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2300AA00' width='32' height='32'/%3E%3Crect fill='%23FFF' x='6' y='8' width='20' height='3'/%3E%3Crect fill='%23FFF' x='6' y='13' width='16' height='3'/%3E%3Crect fill='%23FFF' x='6' y='18' width='18' height='3'/%3E%3Cpath fill='%2300AA00' d='M22 18 L26 22 L22 26 Z'/%3E%3C/svg%3E",
       pos: { top: 140, left: 140 },
       size: { width: 500 },
       content: (
@@ -212,7 +337,7 @@ export default function Portfolio() {
     },
     contact: {
       title: 'Contact Me',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect fill='%23E74C3C' width='48' height='48'/%3E%3Cpath fill='%23FFF' d='M8 12h32v24H8zm4 4l12 8 12-8v-2l-12 8-12-8z'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23CC0000' width='32' height='32'/%3E%3Crect fill='%23FFF' x='4' y='8' width='24' height='16'/%3E%3Cpath fill='%23CC0000' d='M4 8 L16 18 L28 8'/%3E%3Crect fill='%23CC0000' x='4' y='8' width='2' height='16'/%3E%3Crect fill='%23CC0000' x='26' y='8' width='2' height='16'/%3E%3Crect fill='%23CC0000' x='4' y='22' width='24' height='2'/%3E%3C/svg%3E",
       pos: { top: 160, left: 160 },
       size: { width: 500 },
       content: (
@@ -241,7 +366,9 @@ export default function Portfolio() {
   const desktopIcons = [
     { id: 'about', label: 'About Me', icon: windows.about.icon },
     { id: 'ctamap', label: 'CTA Map', icon: windows.ctamap.icon },
-    { id: 'albumranker', label: 'Album Ranker', icon: windows.albumranker.icon },
+    { id: 'albumbattle', label: 'Album Ranker', icon: windows.albumbattle.icon },
+    { id: 'paint', label: 'Paint', icon: windows.paint.icon },
+    { id: 'chat', label: 'Chat Room', icon: windows.chat.icon },
     { id: 'projects', label: 'Projects', icon: windows.projects.icon },
     { id: 'skills', label: 'Skills', icon: windows.skills.icon },
     { id: 'contact', label: 'Contact', icon: windows.contact.icon }
@@ -249,10 +376,42 @@ export default function Portfolio() {
 
   return (
     <>
-      <div className="loading-screen">
-        <div className="loading-logo">PORTFOLIO OS</div>
-        <div className="loading-bar-container">
-          <div className="loading-bar"></div>
+      <div className="loading-screen" style={{
+        background: '#008080',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        width: '100vw',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        zIndex: 9999
+      }}>
+        <div className="loading-logo" style={{
+          fontFamily: 'MS Sans Serif, Arial, sans-serif',
+          fontSize: 32,
+          fontWeight: 'bold',
+          color: '#FFFFFF',
+          marginBottom: 32,
+          textShadow: '2px 2px 0 #000000'
+        }}>
+          WALEED HASAN OS
+        </div>
+        <div className="loading-bar-container" style={{
+          width: 300,
+          height: 30,
+          background: '#C0C0C0',
+          border: '2px inset #DFDFDF',
+          padding: 4,
+          boxShadow: '2px 2px 0 rgba(0,0,0,0.3)'
+        }}>
+          <div className="loading-bar" style={{
+            height: '100%',
+            background: '#000080',
+            animation: 'load 2s ease-in-out'
+          }}></div>
         </div>
       </div>
 
@@ -291,37 +450,94 @@ export default function Portfolio() {
               <button className="window-button close" onClick={() => closeWindow(id)}>×</button>
             </div>
           </div>
-          <div className="window-content" style={{ padding: id === 'ctamap' ? 0 : 16 }}>
+          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat') ? 0 : 16 }}>
             {win.content}
           </div>
         </div>
       ))}
 
-      <div className="taskbar">
-        <button className="start-button">
-          <img className="start-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFF' d='M3 3h8v8H3zm0 10h8v8H3zm10-10h8v8h-8zm0 10h8v8h-8z'/%3E%3C/svg%3E" alt="Start" />
+      <div className="taskbar" style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 40,
+        background: '#C0C0C0',
+        borderTop: '2px solid #FFFFFF',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 4px',
+        gap: 4,
+        fontFamily: 'MS Sans Serif, Arial, sans-serif',
+        fontSize: 11,
+        zIndex: 1000
+      }}>
+        <button className="start-button" style={{
+          background: '#C0C0C0',
+          border: '2px outset #DFDFDF',
+          padding: '4px 8px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 4,
+          cursor: 'pointer',
+          fontWeight: 'bold',
+          fontSize: 11
+        }}
+        onMouseDown={(e) => e.currentTarget.style.border = '2px inset #DFDFDF'}
+        onMouseUp={(e) => e.currentTarget.style.border = '2px outset #DFDFDF'}
+        onMouseLeave={(e) => e.currentTarget.style.border = '2px outset #DFDFDF'}
+        >
+          <img className="start-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M3 3h8v8H3zm0 10h8v8H3zm10-10h8v8h-8zm0 10h8v8h-8z'/%3E%3C/svg%3E" alt="Start" style={{ width: 16, height: 16 }} />
           <span>Start</span>
         </button>
-        <div className="taskbar-items">
+        <div className="taskbar-items" style={{
+          flex: 1,
+          display: 'flex',
+          gap: 2,
+          overflowX: 'auto'
+        }}>
           {openWindows.map(id => (
             <div 
               key={id} 
               className={`taskbar-item ${minimizedWindows.includes(id) ? '' : 'active'}`}
+              style={{
+                background: minimizedWindows.includes(id) ? '#C0C0C0' : '#FFFFFF',
+                border: minimizedWindows.includes(id) ? '2px outset #DFDFDF' : '2px inset #DFDFDF',
+                padding: '4px 8px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                cursor: 'pointer',
+                minWidth: 120,
+                maxWidth: 160
+              }}
               onClick={() => {
                 if (minimizedWindows.includes(id)) {
                   restoreWindow(id)
                 } else {
-                  // If already visible, could minimize it
                   minimizeWindow(id)
                 }
               }}
             >
-              <img src={windows[id].icon} alt="" />
-              <span>{windows[id].title}</span>
+              <img src={windows[id].icon} alt="" style={{ width: 16, height: 16 }} />
+              <span style={{ 
+                overflow: 'hidden', 
+                textOverflow: 'ellipsis', 
+                whiteSpace: 'nowrap',
+                color: '#000'
+              }}>{windows[id].title}</span>
             </div>
           ))}
         </div>
-        <div className="system-tray">
+        <div className="system-tray" style={{
+          background: '#C0C0C0',
+          border: '2px inset #DFDFDF',
+          padding: '4px 8px',
+          minWidth: 80,
+          textAlign: 'center',
+          fontWeight: 'bold',
+          color: '#000'
+        }}>
           <span>{time}</span>
         </div>
       </div>
