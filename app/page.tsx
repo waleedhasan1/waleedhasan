@@ -30,6 +30,16 @@ const ChatAppInline = dynamic(() => import('./components/ChatAppInline'), {
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading chat...</div>
 })
 
+const IPodInline = dynamic(() => import('./components/IPodInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading iPod...</div>
+})
+
+const WeatherRadarInline = dynamic(() => import('./components/WeatherRadarInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading radar...</div>
+})
+
 interface Window {
   title: string
   icon: string
@@ -44,6 +54,9 @@ export default function Portfolio() {
   const [minimizedWindows, setMinimizedWindows] = useState<string[]>([])
   const [dragging, setDragging] = useState<string | null>(null)
   const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const [iconPositions, setIconPositions] = useState<Record<string, { x: number; y: number }>>({})
+  const [windowZIndex, setWindowZIndex] = useState<Record<string, number>>({})
+  const [highestZIndex, setHighestZIndex] = useState(100)
 
   useEffect(() => {
     const updateClock = () => {
@@ -60,6 +73,15 @@ export default function Portfolio() {
     
     return () => clearInterval(interval)
   }, [])
+
+  const bringToFront = (windowId: string) => {
+    const newZIndex = highestZIndex + 1
+    setWindowZIndex(prev => ({
+      ...prev,
+      [windowId]: newZIndex
+    }))
+    setHighestZIndex(newZIndex)
+  }
 
   const openWindow = (windowId: string) => {
     if (!openWindows.includes(windowId)) {
@@ -90,19 +112,53 @@ export default function Portfolio() {
       x: e.clientX - rect.left,
       y: e.clientY - rect.top
     })
+    bringToFront(windowId)
+  }
+
+  const startIconDrag = (e: React.MouseEvent, iconId: string) => {
+    e.stopPropagation()
+    const rect = e.currentTarget.getBoundingClientRect()
+    setDragging(`icon-${iconId}`)
+    setOffset({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    })
   }
 
   const handleMouseMove = (e: MouseEvent) => {
     if (dragging) {
-      const windowEl = document.getElementById(`window-${dragging}`)
-      if (windowEl) {
-        windowEl.style.left = (e.clientX - offset.x) + 'px'
-        windowEl.style.top = (e.clientY - offset.y) + 'px'
+      if (dragging.startsWith('icon-')) {
+        // Dragging an icon
+        const iconId = dragging.replace('icon-', '')
+        const iconEl = document.getElementById(`icon-${iconId}`)
+        if (iconEl) {
+          iconEl.style.left = (e.clientX - offset.x) + 'px'
+          iconEl.style.top = (e.clientY - offset.y) + 'px'
+        }
+      } else {
+        // Dragging a window
+        const windowEl = document.getElementById(`window-${dragging}`)
+        if (windowEl) {
+          windowEl.style.left = (e.clientX - offset.x) + 'px'
+          windowEl.style.top = (e.clientY - offset.y) + 'px'
+        }
       }
     }
   }
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e: MouseEvent) => {
+    if (dragging && dragging.startsWith('icon-')) {
+      // Save icon position
+      const iconId = dragging.replace('icon-', '')
+      const iconEl = document.getElementById(`icon-${iconId}`)
+      if (iconEl) {
+        const rect = iconEl.getBoundingClientRect()
+        setIconPositions(prev => ({
+          ...prev,
+          [iconId]: { x: rect.left, y: rect.top }
+        }))
+      }
+    }
     setDragging(null)
   }
 
@@ -274,6 +330,28 @@ export default function Portfolio() {
         </div>
       )
     },
+    ipod: {
+      title: 'MP3 Player',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%232C2C2C' width='32' height='32' rx='2'/%3E%3Crect fill='%237AA86E' x='4' y='4' width='24' height='12' rx='1'/%3E%3Crect fill='%23000' x='8' y='7' width='16' height='2'/%3E%3Crect fill='%23000' x='10' y='10' width='12' height='1'/%3E%3Crect fill='%2300FF00' x='6' y='20' width='6' height='6'/%3E%3Crect fill='%23C0C0C0' x='14' y='20' width='6' height='6'/%3E%3Crect fill='%23C0C0C0' x='22' y='20' width='6' height='6'/%3E%3C/svg%3E",
+      pos: { top: 120, left: 400 },
+      size: { width: 400, height: 600 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <IPodInline />
+        </div>
+      )
+    },
+    radar: {
+      title: 'Weather Radar',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23004488' width='32' height='32'/%3E%3Ccircle fill='%2300FF00' cx='16' cy='16' r='10' opacity='0.3'/%3E%3Ccircle fill='%2300FF00' cx='16' cy='16' r='6' opacity='0.5'/%3E%3Ccircle fill='%2300FF00' cx='16' cy='16' r='3'/%3E%3Crect fill='%23FFF' x='15' y='4' width='2' height='24'/%3E%3Crect fill='%23FFF' x='4' y='15' width='24' height='2'/%3E%3C/svg%3E",
+      pos: { top: 70, left: 200 },
+      size: { width: 900, height: 700 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <WeatherRadarInline />
+        </div>
+      )
+    },
     projects: {
       title: 'My Projects',
       icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23FF8800' width='32' height='32'/%3E%3Crect fill='%23FFDD00' x='6' y='6' width='20' height='4'/%3E%3Crect fill='%23FFF' x='6' y='12' width='20' height='14'/%3E%3Crect fill='%23FF8800' x='10' y='16' width='12' height='2'/%3E%3Crect fill='%23FF8800' x='10' y='20' width='12' height='2'/%3E%3C/svg%3E",
@@ -366,9 +444,11 @@ export default function Portfolio() {
   const desktopIcons = [
     { id: 'about', label: 'About Me', icon: windows.about.icon },
     { id: 'ctamap', label: 'CTA Map', icon: windows.ctamap.icon },
+    { id: 'radar', label: 'Weather Radar', icon: windows.radar.icon },
     { id: 'albumbattle', label: 'Album Ranker', icon: windows.albumbattle.icon },
     { id: 'paint', label: 'Paint', icon: windows.paint.icon },
     { id: 'chat', label: 'Chat Room', icon: windows.chat.icon },
+    { id: 'ipod', label: 'MP3 Player', icon: windows.ipod.icon },
     { id: 'projects', label: 'Projects', icon: windows.projects.icon },
     { id: 'skills', label: 'Skills', icon: windows.skills.icon },
     { id: 'contact', label: 'Contact', icon: windows.contact.icon }
@@ -416,8 +496,20 @@ export default function Portfolio() {
       </div>
 
       <div className="desktop">
-        {desktopIcons.map(icon => (
-          <div key={icon.id} className="desktop-icon" onClick={() => openWindow(icon.id)}>
+        {desktopIcons.map((icon, index) => (
+          <div 
+            key={icon.id}
+            id={`icon-${icon.id}`}
+            className="desktop-icon" 
+            onDoubleClick={() => openWindow(icon.id)}
+            onMouseDown={(e) => startIconDrag(e, icon.id)}
+            style={{
+              position: 'absolute',
+              left: iconPositions[icon.id]?.x ?? (20 + (index % 2) * 100),
+              top: iconPositions[icon.id]?.y ?? (20 + Math.floor(index / 2) * 100),
+              cursor: dragging === `icon-${icon.id}` ? 'grabbing' : 'pointer'
+            }}
+          >
             <img src={icon.icon} alt={icon.label} />
             <span>{icon.label}</span>
           </div>
@@ -436,8 +528,10 @@ export default function Portfolio() {
             left: win.pos.left,
             width: win.size.width,
             height: win.size.height,
-            display: minimizedWindows.includes(id) ? 'none' : 'block'
+            display: minimizedWindows.includes(id) ? 'none' : 'block',
+            zIndex: windowZIndex[id] || 100
           }}
+          onMouseDown={() => bringToFront(id)}
         >
           <div className="window-title-bar" onMouseDown={(e) => startDrag(e, id)}>
             <div className="window-title">
@@ -450,7 +544,7 @@ export default function Portfolio() {
               <button className="window-button close" onClick={() => closeWindow(id)}>×</button>
             </div>
           </div>
-          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat') ? 0 : 16 }}>
+          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'radar') ? 0 : 16 }}>
             {win.content}
           </div>
         </div>

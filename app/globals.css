@@ -19,7 +19,7 @@
 
 body {
     font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
-    background: url('/sbg.jpg');
+    background: #008080;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
