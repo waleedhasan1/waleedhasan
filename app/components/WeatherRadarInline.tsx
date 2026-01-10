@@ -6,10 +6,9 @@ import 'leaflet/dist/leaflet.css'
 
 export default function WeatherRadarInline() {
   const [loading, setLoading] = useState(true)
-  const [radarUrls, setRadarUrls] = useState<string[]>([])
   const [selectedFrame, setSelectedFrame] = useState(3) // Start with NOW
   const mapRefs = useRef<(L.Map | null)[]>([null, null, null, null])
-  const isSyncing = useRef(false) // Prevent infinite loop
+  const isSyncing = useRef(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -20,16 +19,23 @@ export default function WeatherRadarInline() {
         const response = await fetch('https://api.rainviewer.com/public/weather-maps.json')
         const data = await response.json()
         
-        // Get last 4 frames
-        const frames = data.radar.past.slice(-4)
-        const urls = frames.map((frame: any) => 
+        // Get frames at hourly intervals (every 6th frame)
+        const allFrames = data.radar.past
+        const hourlyFrames = []
+        
+        for (let i = 3; i >= 0; i--) {
+          const index = allFrames.length - 1 - (i * 6)
+          if (index >= 0) {
+            hourlyFrames.push(allFrames[index])
+          }
+        }
+        
+        const urls = hourlyFrames.map((frame: any) => 
           `https://tilecache.rainviewer.com/v2/radar/${frame.path}/256/{z}/{x}/{y}/2/1_1.png`
         )
         
-        setRadarUrls(urls)
-        
-        // Initialize all 4 maps (hidden initially)
-        urls.forEach((url, index) => {
+        // Initialize all 4 maps
+        urls.forEach((url: string, index: number) => {
           const mapId = `radar-map-${index}`
           const mapEl = document.getElementById(mapId)
           
@@ -60,7 +66,6 @@ export default function WeatherRadarInline() {
       }
     }
 
-    // Small delay to ensure DOM is ready
     setTimeout(initMaps, 100)
 
     return () => {
@@ -79,29 +84,25 @@ export default function WeatherRadarInline() {
     }
   }, [selectedFrame])
 
-  // Sync map views - when one map moves, update all others
+  // Sync map views
   useEffect(() => {
     if (mapRefs.current.every(map => map !== null)) {
-      // Add event listeners to sync all maps
       mapRefs.current.forEach((sourceMap, sourceIndex) => {
         if (!sourceMap) return
 
         const syncMaps = () => {
-          // Prevent infinite loop
           if (isSyncing.current) return
           isSyncing.current = true
 
           const center = sourceMap.getCenter()
           const zoom = sourceMap.getZoom()
 
-          // Update all other maps
           mapRefs.current.forEach((targetMap, targetIndex) => {
             if (targetMap && targetIndex !== sourceIndex) {
               targetMap.setView(center, zoom, { animate: false })
             }
           })
 
-          // Reset sync flag after a short delay
           setTimeout(() => {
             isSyncing.current = false
           }, 100)
@@ -111,7 +112,6 @@ export default function WeatherRadarInline() {
         sourceMap.on('zoomend', syncMaps)
       })
 
-      // Cleanup
       return () => {
         mapRefs.current.forEach(map => {
           if (map) {
@@ -124,9 +124,10 @@ export default function WeatherRadarInline() {
   }, [loading])
 
   const getTimeLabel = (index: number) => {
-    const minutesAgo = (3 - index) * 10
-    if (minutesAgo === 0) return 'NOW'
-    return `${minutesAgo} MIN AGO`
+    const hoursAgo = 3 - index
+    if (hoursAgo === 0) return 'NOW'
+    if (hoursAgo === 1) return '1 HR AGO'
+    return `${hoursAgo} HRS AGO`
   }
 
   return (
@@ -201,7 +202,7 @@ export default function WeatherRadarInline() {
         </div>
       </div>
 
-      {/* Map Container - Shows selected map */}
+      {/* Map Container */}
       <div style={{
         flex: 1,
         background: '#C0C0C0',

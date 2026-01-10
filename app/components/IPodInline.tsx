@@ -4,10 +4,13 @@ import { useState, useRef, useEffect } from 'react';
 
 export default function IPodInline() {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(70);
+  const [songName, setSongName] = useState('No song loaded');
+  const [audioSrc, setAudioSrc] = useState<string | null>(null);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -27,9 +30,32 @@ export default function IPodInline() {
     };
   }, []);
 
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Check if it's an audio file
+    if (!file.type.startsWith('audio/')) {
+      alert('Please select an audio file (MP3, WAV, etc.)');
+      return;
+    }
+
+    // Revoke old URL if exists
+    if (audioSrc) {
+      URL.revokeObjectURL(audioSrc);
+    }
+
+    // Create object URL for the file
+    const url = URL.createObjectURL(file);
+    setAudioSrc(url);
+    setSongName(file.name);
+    setCurrentTime(0);
+    setIsPlaying(false);
+  };
+
   const togglePlay = () => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !audioSrc) return;
 
     if (isPlaying) {
       audio.pause();
@@ -92,6 +118,33 @@ export default function IPodInline() {
           ♪ WALEED MP3 PLAYER ♪
         </div>
 
+        {/* File Upload Button */}
+        <div style={{ marginBottom: 12 }}>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="audio/*"
+            onChange={handleFileUpload}
+            style={{ display: 'none' }}
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            style={{
+              width: '100%',
+              background: '#C0C0C0',
+              border: '2px outset #DFDFDF',
+              padding: '8px',
+              cursor: 'pointer',
+              fontSize: 11,
+              fontWeight: 'bold'
+            }}
+            onMouseDown={(e) => e.currentTarget.style.border = '2px inset #DFDFDF'}
+            onMouseUp={(e) => e.currentTarget.style.border = '2px outset #DFDFDF'}
+          >
+            📁 LOAD SONG
+          </button>
+        </div>
+
         {/* LCD Screen */}
         <div style={{
           background: '#7AA86E',
@@ -121,25 +174,40 @@ export default function IPodInline() {
             fontSize: 10,
             color: '#000',
             marginBottom: 8,
-            textAlign: 'center'
+            textAlign: 'center',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap'
           }}>
-            My Song.mp3
+            {songName}
           </div>
 
           {/* Progress Bar */}
-          <div style={{
-            background: '#4A6B3E',
-            border: '1px solid #000',
-            height: 12,
-            marginBottom: 6,
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
+          <div 
+            onClick={(e) => {
+              if (!audioSrc || !duration) return;
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const percentage = x / rect.width;
+              const newTime = percentage * duration;
+              handleSeek(newTime);
+            }}
+            style={{
+              background: '#4A6B3E',
+              border: '1px solid #000',
+              height: 12,
+              marginBottom: 6,
+              position: 'relative',
+              overflow: 'hidden',
+              cursor: audioSrc ? 'pointer' : 'default'
+            }}
+          >
             <div style={{
               background: '#000',
               height: '100%',
               width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
-              transition: 'width 0.1s'
+              transition: 'width 0.1s',
+              pointerEvents: 'none'
             }} />
           </div>
 
@@ -167,16 +235,17 @@ export default function IPodInline() {
           {/* Previous/Rewind */}
           <button
             onClick={() => handleSeek(Math.max(currentTime - 10, 0))}
+            disabled={!audioSrc}
             style={{
-              background: '#C0C0C0',
+              background: audioSrc ? '#C0C0C0' : '#808080',
               border: '2px outset #DFDFDF',
               padding: '12px 8px',
-              cursor: 'pointer',
+              cursor: audioSrc ? 'pointer' : 'not-allowed',
               fontSize: 16,
               fontWeight: 'bold',
               borderRadius: 4
             }}
-            onMouseDown={(e) => e.currentTarget.style.border = '2px inset #DFDFDF'}
+            onMouseDown={(e) => audioSrc && (e.currentTarget.style.border = '2px inset #DFDFDF')}
             onMouseUp={(e) => e.currentTarget.style.border = '2px outset #DFDFDF'}
           >
             ⏮
@@ -185,17 +254,18 @@ export default function IPodInline() {
           {/* Play/Pause */}
           <button
             onClick={togglePlay}
+            disabled={!audioSrc}
             style={{
-              background: '#00AA00',
+              background: audioSrc ? '#00AA00' : '#005500',
               border: '2px outset #00DD00',
               padding: '12px 8px',
-              cursor: 'pointer',
+              cursor: audioSrc ? 'pointer' : 'not-allowed',
               fontSize: 20,
               fontWeight: 'bold',
               borderRadius: 4,
               color: '#FFF'
             }}
-            onMouseDown={(e) => e.currentTarget.style.border = '2px inset #00DD00'}
+            onMouseDown={(e) => audioSrc && (e.currentTarget.style.border = '2px inset #00DD00')}
             onMouseUp={(e) => e.currentTarget.style.border = '2px outset #00DD00'}
           >
             {isPlaying ? '⏸' : '▶'}
@@ -204,16 +274,17 @@ export default function IPodInline() {
           {/* Next/Forward */}
           <button
             onClick={() => handleSeek(Math.min(currentTime + 10, duration))}
+            disabled={!audioSrc}
             style={{
-              background: '#C0C0C0',
+              background: audioSrc ? '#C0C0C0' : '#808080',
               border: '2px outset #DFDFDF',
               padding: '12px 8px',
-              cursor: 'pointer',
+              cursor: audioSrc ? 'pointer' : 'not-allowed',
               fontSize: 16,
               fontWeight: 'bold',
               borderRadius: 4
             }}
-            onMouseDown={(e) => e.currentTarget.style.border = '2px inset #DFDFDF'}
+            onMouseDown={(e) => audioSrc && (e.currentTarget.style.border = '2px inset #DFDFDF')}
             onMouseUp={(e) => e.currentTarget.style.border = '2px outset #DFDFDF'}
           >
             ⏭
@@ -292,17 +363,17 @@ export default function IPodInline() {
               width: 12,
               height: 12,
               borderRadius: '50%',
-              background: '#FF0000',
+              background: audioSrc ? '#FF0000' : '#330000',
               border: '2px solid #000',
               margin: '0 auto 4px',
-              boxShadow: '0 0 8px #FF0000'
+              boxShadow: audioSrc ? '0 0 8px #FF0000' : 'none'
             }} />
             <span style={{ fontSize: 8, color: '#AAA' }}>POWER</span>
           </div>
         </div>
 
         {/* Hidden Audio Element */}
-        <audio ref={audioRef} src="/dejavurodrigoshoegaze.mp3" />
+        {audioSrc && <audio ref={audioRef} src={audioSrc} />}
       </div>
     </div>
   );
