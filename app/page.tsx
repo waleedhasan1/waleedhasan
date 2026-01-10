@@ -35,6 +35,11 @@ const IPodInline = dynamic(() => import('./components/IPodInline'), {
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading iPod...</div>
 })
 
+const SnakeGameInline = dynamic(() => import('./components/SnakeGameInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading Snake...</div>
+})
+
 const WeatherRadarInline = dynamic(() => import('./components/WeatherRadarInline'), {
   ssr: false,
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading radar...</div>
@@ -352,91 +357,354 @@ export default function Portfolio() {
         </div>
       )
     },
+    snake: {
+      title: 'Snake Game',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23000' width='32' height='32'/%3E%3Crect fill='%2300FF00' x='8' y='12' width='4' height='4'/%3E%3Crect fill='%2300AA00' x='12' y='12' width='4' height='4'/%3E%3Crect fill='%2300AA00' x='16' y='12' width='4' height='4'/%3E%3Crect fill='%2300AA00' x='16' y='16' width='4' height='4'/%3E%3Crect fill='%23FF0000' x='24' y='8' width='4' height='4'/%3E%3C/svg%3E",
+      pos: { top: 100, left: 350 },
+      size: { width: 500, height: 600 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <SnakeGameInline />
+        </div>
+      )
+    },
     projects: {
-      title: 'My Projects',
+      title: 'Projects',
       icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23FF8800' width='32' height='32'/%3E%3Crect fill='%23FFDD00' x='6' y='6' width='20' height='4'/%3E%3Crect fill='%23FFF' x='6' y='12' width='20' height='14'/%3E%3Crect fill='%23FF8800' x='10' y='16' width='12' height='2'/%3E%3Crect fill='%23FF8800' x='10' y='20' width='12' height='2'/%3E%3C/svg%3E",
       pos: { top: 120, left: 120 },
       size: { width: 600, height: 500 },
       content: (
-        <>
-          <h2>💼 Portfolio Projects</h2>
-          <div className="project-card" onClick={() => openWindow('ctamap')} style={{ cursor: 'pointer' }}>
-            <h4>CTA Train Tracker</h4>
-            <p>Real-time Chicago transit system tracker showing train arrivals and departures!</p>
-            <div style={{ marginTop: 8 }}>
-              <span className="skill-tag">Next.js</span>
-              <span className="skill-tag">React</span>
-              <span className="skill-tag">Leaflet</span>
-              <span className="skill-tag">CTA API</span>
+        <div style={{ 
+          height: '100%', 
+          background: '#008080',
+          padding: 16,
+          overflowY: 'auto'
+        }}>
+          <div style={{
+            background: '#C0C0C0',
+            border: '2px outset #DFDFDF',
+            padding: 16,
+            marginBottom: 12,
+            boxShadow: '2px 2px 0 rgba(0,0,0,0.3)'
+          }}>
+            <div style={{
+              background: '#000080',
+              color: 'white',
+              padding: '6px 8px',
+              marginBottom: 12,
+              fontWeight: 'bold',
+              fontSize: 14
+            }}>
+              Projects
+            </div>
+            
+            <div className="project-card" onClick={() => openWindow('ctamap')} style={{ cursor: 'pointer', marginBottom: 12 }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>CTA Train Tracker</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Real-time Chicago transit system tracker showing train arrivals and departures!</p>
+              <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">Next.js</span>
+                <span className="skill-tag">React</span>
+                <span className="skill-tag">Leaflet</span>
+                <span className="skill-tag">CTA API</span>
+                <span className="skill-tag">Python</span>
+                <span className="skill-tag">Pandas</span>
+              </div>
+            </div>
+            
+            <div className="project-card" onClick={() => openWindow('albumbattle')} style={{ cursor: 'pointer', marginBottom: 12 }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>Album Ranker</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Battle your favorite albums and see which ones rank highest using ELO ratings!</p>
+              <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">Next.js</span>
+                <span className="skill-tag">React</span>
+                <span className="skill-tag">ELO Algorithm</span>
+                <span className="skill-tag">PostgreSQL</span>
+                <span className="skill-tag">Python</span>
+                <span className="skill-tag">Pandas</span>
+                <span className="skill-tag">Beautiful Soup</span>
+              </div>
+            </div>
+            
+            <div className="project-card" onClick={() => openWindow('ipod')} style={{ cursor: 'pointer' }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>Digital MP3 Player</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>A retro MP3 player that lets you upload and play your own music files!</p>
+              <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">React</span>
+                <span className="skill-tag">Web Audio API</span>
+                <span className="skill-tag">File Upload</span>
+              </div>
             </div>
           </div>
-          <div className="project-card" onClick={() => openWindow('albumbattle')} style={{ cursor: 'pointer' }}>
-            <h4>Album Ranker</h4>
-            <p>Battle your favorite albums and see which ones rank highest using ELO ratings!</p>
-            <div style={{ marginTop: 8 }}>
-              <span className="skill-tag">Next.js</span>
-              <span className="skill-tag">React</span>
-              <span className="skill-tag">ELO Algorithm</span>
-              <span className="skill-tag">PostgreSQL</span>
-            </div>
-          </div>
-          <div className="project-card">
-            <h4>Project Name 3</h4>
-            <p>A retro-inspired [type of project] that demonstrates [skills/concepts].</p>
-            <div style={{ marginTop: 8 }}>
-              <span className="skill-tag">HTML/CSS</span>
-              <span className="skill-tag">JavaScript</span>
-              <span className="skill-tag">Canvas API</span>
-            </div>
-          </div>
-        </>
+        </div>
       )
     },
     skills: {
       title: 'Skills & Technologies',
       icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2300AA00' width='32' height='32'/%3E%3Crect fill='%23FFF' x='6' y='8' width='20' height='3'/%3E%3Crect fill='%23FFF' x='6' y='13' width='16' height='3'/%3E%3Crect fill='%23FFF' x='6' y='18' width='18' height='3'/%3E%3Cpath fill='%2300AA00' d='M22 18 L26 22 L22 26 Z'/%3E%3C/svg%3E",
       pos: { top: 140, left: 140 },
-      size: { width: 500 },
+      size: { width: 600, height: 550 },
       content: (
-        <>
-          <h2>🛠️ Technical Skills</h2>
-          <h3>Frontend</h3>
-          <p>HTML5, CSS3, JavaScript (ES6+), React, Vue.js, Tailwind CSS, SASS/SCSS</p>
-          <h3>Backend</h3>
-          <p>Node.js, Python, Django, Express, REST APIs, GraphQL</p>
-          <h3>Database</h3>
-          <p>MongoDB, PostgreSQL, MySQL, Firebase, Redis</p>
-          <h3>Tools & Others</h3>
-          <p>Git, Docker, AWS, Figma, Photoshop, VS Code, Linux</p>
-          <h3>Currently Learning</h3>
-          <p>TypeScript, Next.js, Three.js, Web3</p>
-        </>
+        <div style={{ 
+          height: '100%', 
+          background: '#008080',
+          padding: 16,
+          overflowY: 'auto'
+        }}>
+          <div style={{
+            background: '#C0C0C0',
+            border: '2px outset #DFDFDF',
+            padding: 16,
+            boxShadow: '2px 2px 0 rgba(0,0,0,0.3)'
+          }}>
+            <div style={{
+              background: '#000080',
+              color: 'white',
+              padding: '6px 8px',
+              marginBottom: 16,
+              fontWeight: 'bold',
+              fontSize: 14
+            }}>
+              Technical Skills
+            </div>
+
+            {/* Core Languages */}
+            <div style={{
+              background: '#DFDFDF',
+              border: '2px inset #808080',
+              padding: 12,
+              marginBottom: 12
+            }}>
+              <h3 style={{ 
+                margin: '0 0 12px 0', 
+                color: '#000080',
+                fontSize: 13,
+                fontWeight: 'bold'
+              }}>Core Languages</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <span className="skill-tag" style={{ background: '#000080', color: 'white', fontWeight: 'bold' }}>Python</span>
+                <span className="skill-tag" style={{ background: '#000080', color: 'white', fontWeight: 'bold' }}>JavaScript</span>
+                <span className="skill-tag" style={{ background: '#000080', color: 'white', fontWeight: 'bold' }}>SQL</span>
+                <span className="skill-tag">TypeScript</span>
+                <span className="skill-tag">HTML5</span>
+                <span className="skill-tag">CSS3</span>
+              </div>
+            </div>
+
+            {/* Frontend */}
+            <div style={{
+              background: '#DFDFDF',
+              border: '2px inset #808080',
+              padding: 12,
+              marginBottom: 12
+            }}>
+              <h3 style={{ 
+                margin: '0 0 12px 0', 
+                color: '#000080',
+                fontSize: 13,
+                fontWeight: 'bold'
+              }}>Frontend</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <span className="skill-tag">React</span>
+                <span className="skill-tag">Next.js</span>
+                <span className="skill-tag">Vue.js</span>
+                <span className="skill-tag">Tailwind CSS</span>
+                <span className="skill-tag">SASS/SCSS</span>
+              </div>
+            </div>
+
+            {/* Backend & Databases */}
+            <div style={{
+              background: '#DFDFDF',
+              border: '2px inset #808080',
+              padding: 12,
+              marginBottom: 12
+            }}>
+              <h3 style={{ 
+                margin: '0 0 12px 0', 
+                color: '#000080',
+                fontSize: 13,
+                fontWeight: 'bold'
+              }}>Backend & Databases</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <span className="skill-tag" style={{ background: '#000080', color: 'white', fontWeight: 'bold' }}>PostgreSQL</span>
+                <span className="skill-tag">Node.js</span>
+                <span className="skill-tag">Express</span>
+                <span className="skill-tag">Django</span>
+                <span className="skill-tag">MongoDB</span>
+                <span className="skill-tag">MySQL</span>
+                <span className="skill-tag">Firebase</span>
+                <span className="skill-tag">REST APIs</span>
+                <span className="skill-tag">GraphQL</span>
+              </div>
+            </div>
+
+            {/* Data & Analysis */}
+            <div style={{
+              background: '#DFDFDF',
+              border: '2px inset #808080',
+              padding: 12,
+              marginBottom: 12
+            }}>
+              <h3 style={{ 
+                margin: '0 0 12px 0', 
+                color: '#000080',
+                fontSize: 13,
+                fontWeight: 'bold'
+              }}>Data & Analysis</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <span className="skill-tag">Pandas</span>
+                <span className="skill-tag">Beautiful Soup</span>
+                <span className="skill-tag">NumPy</span>
+                <span className="skill-tag">Data Scraping</span>
+              </div>
+            </div>
+
+            {/* Tools & Others */}
+            <div style={{
+              background: '#DFDFDF',
+              border: '2px inset #808080',
+              padding: 12,
+              marginBottom: 12
+            }}>
+              <h3 style={{ 
+                margin: '0 0 12px 0', 
+                color: '#000080',
+                fontSize: 13,
+                fontWeight: 'bold'
+              }}>Tools & Others</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <span className="skill-tag" style={{ background: '#000080', color: 'white', fontWeight: 'bold' }}>Git</span>
+                <span className="skill-tag" style={{ background: '#000080', color: 'white', fontWeight: 'bold' }}>VS Code</span>
+                <span className="skill-tag">Docker</span>
+                <span className="skill-tag">AWS</span>
+                <span className="skill-tag">Figma</span>
+                <span className="skill-tag">Linux</span>
+              </div>
+            </div>
+
+            {/* Currently Learning */}
+            <div style={{
+              background: '#DFDFDF',
+              border: '2px inset #808080',
+              padding: 12
+            }}>
+              <h3 style={{ 
+                margin: '0 0 12px 0', 
+                color: '#000080',
+                fontSize: 13,
+                fontWeight: 'bold'
+              }}>Currently Learning</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <span className="skill-tag">Three.js</span>
+                <span className="skill-tag">Machine Learning</span>
+              </div>
+            </div>
+          </div>
+        </div>
       )
     },
     contact: {
       title: 'Contact Me',
       icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23CC0000' width='32' height='32'/%3E%3Crect fill='%23FFF' x='4' y='8' width='24' height='16'/%3E%3Cpath fill='%23CC0000' d='M4 8 L16 18 L28 8'/%3E%3Crect fill='%23CC0000' x='4' y='8' width='2' height='16'/%3E%3Crect fill='%23CC0000' x='26' y='8' width='2' height='16'/%3E%3Crect fill='%23CC0000' x='4' y='22' width='24' height='2'/%3E%3C/svg%3E",
       pos: { top: 160, left: 160 },
-      size: { width: 500 },
+      size: { width: 500, height: 400 },
       content: (
-        <>
-          <h2>📬 Get In Touch</h2>
-          <p>I&apos;m always open to new opportunities and interesting projects. Feel free to reach out!</p>
-          <h3>Email</h3>
-          <p><a href="mailto:your.email@example.com">your.email@example.com</a></p>
-          <h3>Social Links</h3>
-          <ul>
-            <li><a href="#" target="_blank">GitHub</a></li>
-            <li><a href="#" target="_blank">LinkedIn</a></li>
-            <li><a href="#" target="_blank">Twitter/X</a></li>
-            <li><a href="#" target="_blank">Instagram</a></li>
-          </ul>
-          <h3>Location</h3>
-          <p>Chicago, Illinois</p>
-          <p style={{ marginTop: 20, padding: 12, background: '#FFFFCC', borderLeft: '3px solid #F39C12' }}>
-            <strong>Quick Response Time:</strong> I typically respond within 24-48 hours!
-          </p>
-        </>
+        <div style={{ 
+          height: '100%', 
+          background: '#008080',
+          padding: 16,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div style={{
+            background: '#C0C0C0',
+            border: '2px outset #DFDFDF',
+            padding: 32,
+            boxShadow: '2px 2px 0 rgba(0,0,0,0.3)',
+            width: '100%',
+            maxWidth: 400
+          }}>
+            <div style={{
+              background: '#000080',
+              color: 'white',
+              padding: '10px 12px',
+              marginBottom: 24,
+              fontWeight: 'bold',
+              fontSize: 16,
+              textAlign: 'center'
+            }}>
+              Get In Touch
+            </div>
+
+            {/* Email */}
+            <div style={{
+              marginBottom: 24
+            }}>
+              <div style={{
+                color: '#000',
+                fontSize: 11,
+                fontWeight: 'bold',
+                marginBottom: 6,
+                textTransform: 'uppercase'
+              }}>
+                Email:
+              </div>
+              <div style={{
+                color: '#000080',
+                fontSize: 14,
+                fontWeight: 'bold',
+                fontFamily: 'MS Sans Serif, Arial, sans-serif'
+              }}>
+                your.email@example.com
+              </div>
+            </div>
+
+            {/* Phone */}
+            <div style={{
+              marginBottom: 24
+            }}>
+              <div style={{
+                color: '#000',
+                fontSize: 11,
+                fontWeight: 'bold',
+                marginBottom: 6,
+                textTransform: 'uppercase'
+              }}>
+                Phone:
+              </div>
+              <div style={{
+                color: '#000080',
+                fontSize: 14,
+                fontWeight: 'bold',
+                fontFamily: 'MS Sans Serif, Arial, sans-serif'
+              }}>
+                (123) 456-7890
+              </div>
+            </div>
+
+            {/* Location */}
+            <div>
+              <div style={{
+                color: '#000',
+                fontSize: 11,
+                fontWeight: 'bold',
+                marginBottom: 6,
+                textTransform: 'uppercase'
+              }}>
+                Location:
+              </div>
+              <div style={{
+                color: '#000',
+                fontSize: 14,
+                fontWeight: 'bold',
+                fontFamily: 'MS Sans Serif, Arial, sans-serif'
+              }}>
+                Chicago, Illinois
+              </div>
+            </div>
+          </div>
+        </div>
       )
     }
   }
@@ -448,6 +716,7 @@ export default function Portfolio() {
     { id: 'albumbattle', label: 'Album Ranker', icon: windows.albumbattle.icon },
     { id: 'paint', label: 'Paint', icon: windows.paint.icon },
     { id: 'chat', label: 'Chat Room', icon: windows.chat.icon },
+    { id: 'snake', label: 'Snake Game', icon: windows.snake.icon },
     { id: 'ipod', label: 'MP3 Player', icon: windows.ipod.icon },
     { id: 'projects', label: 'Projects', icon: windows.projects.icon },
     { id: 'skills', label: 'Skills', icon: windows.skills.icon },
@@ -544,7 +813,7 @@ export default function Portfolio() {
               <button className="window-button close" onClick={() => closeWindow(id)}>×</button>
             </div>
           </div>
-          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'radar') ? 0 : 16 }}>
+          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar') ? 0 : 16 }}>
             {win.content}
           </div>
         </div>
