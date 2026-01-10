@@ -20,9 +20,6 @@
 body {
     font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
     background: #008080;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
     height: 100vh;
     overflow: hidden;
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M0,0 L0,13 L4,9 L6,14 L8,13 L6,8 L10,8 Z" fill="white" stroke="black"/></svg>'), auto;
@@ -40,6 +37,13 @@ body {
     cursor: pointer;
     margin-bottom: 20px;
     transition: filter 0.1s;
+    padding: 4px;
+    border: 2px dashed transparent;
+}
+
+.desktop-icon:hover {
+    border: 2px dashed #000080;
+    background: rgba(0, 0, 128, 0.1);
 }
 
 .desktop-icon:active {
@@ -72,10 +76,10 @@ body {
     position: absolute;
     min-width: 400px;
     min-height: 300px;
-    background: #ECE9D8;
-    border: 3px solid;
-    border-color: #0831D9 #0831D9 #042674 #042674;
-    box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+    background: #C0C0C0;
+    border: 2px solid;
+    border-color: #DFDFDF #808080 #808080 #DFDFDF;
+    box-shadow: 1px 1px 0 #000;
     display: none;
     z-index: 1;
 }
@@ -86,8 +90,8 @@ body {
 }
 
 .window-title-bar {
-    background: linear-gradient(180deg, var(--title-bar-start) 0%, var(--title-bar-end) 100%);
-    padding: 4px 6px;
+    background: #000080;
+    padding: 2px 2px 2px 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -98,10 +102,10 @@ body {
 .window-title {
     color: white;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 11px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
 }
 
 .window-title img {
@@ -116,39 +120,48 @@ body {
 }
 
 .window-button {
-    width: 21px;
-    height: 21px;
+    width: 16px;
+    height: 14px;
     border: 1px solid;
-    border-color: white #003C74 #003C74 white;
-    background: linear-gradient(180deg, #ECE9D8 0%, #C0C7D8 100%);
+    border-color: #DFDFDF #000 #000 #DFDFDF;
+    background: #C0C0C0;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    color: #000;
 }
 
 .window-button:hover {
-    background: linear-gradient(180deg, #FFF 0%, #DCDFE8 100%);
+    background: #DFDFDF;
 }
 
 .window-button:active {
-    border-color: #003C74 white white #003C74;
-    background: #C0C7D8;
+    border-color: #000 #DFDFDF #DFDFDF #000;
+    background: #808080;
 }
 
 .window-button.close {
-    background: linear-gradient(180deg, #F77B7B 0%, #E14B4B 100%);
-    color: white;
-    border-color: #FF9A9A #8B0000 #8B0000 #FF9A9A;
+    background: #C0C0C0;
+    color: #000;
+}
+
+.window-button.close:hover {
+    background: #DFDFDF;
+}
+
+.window-button.close:active {
+    border-color: #000 #DFDFDF #DFDFDF #000;
+    background: #808080;
 }
 
 .window-content {
     padding: 16px;
     height: calc(100% - 33px);
     overflow-y: auto;
-    background: white;
+    background: #C0C0C0;
     font-size: 13px;
     line-height: 1.6;
 }

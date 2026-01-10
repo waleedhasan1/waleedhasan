@@ -181,7 +181,7 @@ export default function Portfolio() {
   const windows: Record<string, Window> = {
     about: {
       title: 'About Me',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%230000AA' width='32' height='32'/%3E%3Crect fill='%23FFF' x='8' y='8' width='16' height='16'/%3E%3Crect fill='%230000AA' x='12' y='10' width='8' height='2'/%3E%3Crect fill='%230000AA' x='12' y='14' width='8' height='2'/%3E%3Crect fill='%230000AA' x='12' y='18' width='8' height='4'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23C0C0C0' d='M2 2h28v28H2z'/%3E%3Cpath fill='%23000080' d='M4 4h24v24H4z'/%3E%3Ccircle fill='%23FFCC99' cx='16' cy='12' r='4'/%3E%3Cpath fill='%23FFCC99' d='M10 20h12v6H10z'/%3E%3Cpath fill='%23FFF' d='M5 5h22v1H5zm0 21h22v1H5zM5 5h1v22H5zm21 0h1v22h-1z'/%3E%3C/svg%3E",
       pos: { top: 100, left: 100 },
       size: { width: 500, height: 600 },
       content: (
@@ -282,7 +282,7 @@ export default function Portfolio() {
     },
     ctamap: {
       title: 'CTA Train Map',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%230000AA' width='32' height='32'/%3E%3Crect fill='%23FFF' x='6' y='10' width='20' height='12'/%3E%3Crect fill='%230000AA' x='10' y='14' width='4' height='4'/%3E%3Crect fill='%230000AA' x='18' y='14' width='4' height='4'/%3E%3Crect fill='%230000AA' x='8' y='24' width='2' height='2'/%3E%3Crect fill='%230000AA' x='22' y='24' width='2' height='2'/%3E%3C/svg%3E",
+      icon: "/icons/ctamap.png",
       pos: { top: 50, left: 100 },
       size: { width: 1000, height: 700 },
       content: (
@@ -293,7 +293,7 @@ export default function Portfolio() {
     },
     albumbattle: {
       title: 'Album Ranker',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23800080' width='32' height='32'/%3E%3Crect fill='%23FFF' x='8' y='8' width='16' height='16'/%3E%3Ccircle fill='%23800080' cx='16' cy='16' r='5'/%3E%3Ccircle fill='%23FFF' cx='16' cy='16' r='2'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle fill='%23E0E0E0' cx='16' cy='16' r='13'/%3E%3Ccircle fill='%23FFD700' cx='16' cy='16' r='10'/%3E%3Ccircle fill='%23333' cx='16' cy='16' r='4'/%3E%3Cpath fill='%23FFD700' d='M14 4h4v3l-2 2-2-2z'/%3E%3Cpath fill='%23FFA500' d='M13 6h6v1h-6z'/%3E%3C/svg%3E",
       pos: { top: 80, left: 150 },
       size: { width: 900, height: 650 },
       content: (
@@ -315,7 +315,7 @@ export default function Portfolio() {
     },
     paint: {
       title: 'Paint',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23FF1493' width='32' height='32'/%3E%3Crect fill='%23FFF' x='8' y='4' width='4' height='16'/%3E%3Crect fill='%23FFF' x='12' y='6' width='2' height='12'/%3E%3Crect fill='%23FFF' x='6' y='20' width='20' height='8'/%3E%3Crect fill='%23FF1493' x='10' y='22' width='12' height='4'/%3E%3C/svg%3E",
+      icon: "/icons/paint.png",
       pos: { top: 60, left: 250 },
       size: { width: 900, height: 700 },
       content: (
@@ -326,7 +326,7 @@ export default function Portfolio() {
     },
     chat: {
       title: 'Chat Room',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2300AAAA' width='32' height='32'/%3E%3Crect fill='%23FFF' x='4' y='6' width='24' height='16'/%3E%3Cpath fill='%23FFF' d='M12 22 L16 26 L20 22 Z'/%3E%3Crect fill='%2300AAAA' x='8' y='10' width='16' height='2'/%3E%3Crect fill='%2300AAAA' x='8' y='14' width='12' height='2'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23FFDD88' x='4' y='6' width='24' height='16' rx='2'/%3E%3Cpath fill='%23FFDD88' d='M12 22l4 4 4-4z'/%3E%3Cpath fill='%23000' d='M8 11h16M8 14h12M8 17h14' stroke='%23000' stroke-width='1.5'/%3E%3Cpath fill='%23FFF' d='M5 7h22v1H5z'/%3E%3C/svg%3E",
       pos: { top: 80, left: 300 },
       size: { width: 600, height: 650 },
       content: (
@@ -337,7 +337,7 @@ export default function Portfolio() {
     },
     ipod: {
       title: 'MP3 Player',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%232C2C2C' width='32' height='32' rx='2'/%3E%3Crect fill='%237AA86E' x='4' y='4' width='24' height='12' rx='1'/%3E%3Crect fill='%23000' x='8' y='7' width='16' height='2'/%3E%3Crect fill='%23000' x='10' y='10' width='12' height='1'/%3E%3Crect fill='%2300FF00' x='6' y='20' width='6' height='6'/%3E%3Crect fill='%23C0C0C0' x='14' y='20' width='6' height='6'/%3E%3Crect fill='%23C0C0C0' x='22' y='20' width='6' height='6'/%3E%3C/svg%3E",
+      icon: "/icons/mp3.png",
       pos: { top: 120, left: 400 },
       size: { width: 400, height: 600 },
       content: (
@@ -348,7 +348,7 @@ export default function Portfolio() {
     },
     radar: {
       title: 'Weather Radar',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23004488' width='32' height='32'/%3E%3Ccircle fill='%2300FF00' cx='16' cy='16' r='10' opacity='0.3'/%3E%3Ccircle fill='%2300FF00' cx='16' cy='16' r='6' opacity='0.5'/%3E%3Ccircle fill='%2300FF00' cx='16' cy='16' r='3'/%3E%3Crect fill='%23FFF' x='15' y='4' width='2' height='24'/%3E%3Crect fill='%23FFF' x='4' y='15' width='24' height='2'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23008080' width='32' height='32'/%3E%3Ccircle fill='%23006666' cx='16' cy='16' r='12'/%3E%3Ccircle fill='%23004444' cx='16' cy='16' r='9'/%3E%3Ccircle fill='%23003333' cx='16' cy='16' r='6'/%3E%3Cpath fill='%2300FF00' d='M16 16L26 10' stroke='%2300FF00' stroke-width='2'/%3E%3Ccircle fill='%23FF0000' cx='22' cy='12' r='2'/%3E%3Ccircle fill='%23FFFF00' cx='12' cy='20' r='1.5'/%3E%3C/svg%3E",
       pos: { top: 70, left: 200 },
       size: { width: 900, height: 700 },
       content: (
@@ -359,7 +359,7 @@ export default function Portfolio() {
     },
     snake: {
       title: 'Snake Game',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23000' width='32' height='32'/%3E%3Crect fill='%2300FF00' x='8' y='12' width='4' height='4'/%3E%3Crect fill='%2300AA00' x='12' y='12' width='4' height='4'/%3E%3Crect fill='%2300AA00' x='16' y='12' width='4' height='4'/%3E%3Crect fill='%2300AA00' x='16' y='16' width='4' height='4'/%3E%3Crect fill='%23FF0000' x='24' y='8' width='4' height='4'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23666' width='32' height='32' rx='2'/%3E%3Crect fill='%23444' x='2' y='4' width='28' height='20' rx='1'/%3E%3Crect fill='%2300AA00' x='4' y='6' width='24' height='16'/%3E%3Crect fill='%2300FF00' x='8' y='12' width='3' height='3'/%3E%3Crect fill='%2300FF00' x='11' y='12' width='3' height='3'/%3E%3Crect fill='%2300FF00' x='14' y='15' width='3' height='3'/%3E%3Crect fill='%23FF0000' x='20' cy='10' width='3' height='3'/%3E%3Ctext x='16' y='30' text-anchor='middle' fill='%23FFF' font-size='6' font-family='Arial'>SNAKE%3C/text%3E%3C/svg%3E",
       pos: { top: 100, left: 350 },
       size: { width: 500, height: 600 },
       content: (
@@ -370,7 +370,7 @@ export default function Portfolio() {
     },
     projects: {
       title: 'Projects',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23FF8800' width='32' height='32'/%3E%3Crect fill='%23FFDD00' x='6' y='6' width='20' height='4'/%3E%3Crect fill='%23FFF' x='6' y='12' width='20' height='14'/%3E%3Crect fill='%23FF8800' x='10' y='16' width='12' height='2'/%3E%3Crect fill='%23FF8800' x='10' y='20' width='12' height='2'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23FFCC00' d='M3 8h10l2 2h14v16H3z'/%3E%3Cpath fill='%23FFE066' d='M3 8h10l2 2h14v3H3z'/%3E%3Cpath fill='%23CC9900' d='M3 25h26v1H3z'/%3E%3Crect fill='%23FFF' x='8' y='14' width='16' height='2'/%3E%3Crect fill='%23FFF' x='8' y='17' width='12' height='2'/%3E%3Crect fill='%23FFF' x='8' y='20' width='14' height='2'/%3E%3C/svg%3E",
       pos: { top: 120, left: 120 },
       size: { width: 600, height: 500 },
       content: (
@@ -440,7 +440,7 @@ export default function Portfolio() {
     },
     skills: {
       title: 'Skills & Technologies',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2300AA00' width='32' height='32'/%3E%3Crect fill='%23FFF' x='6' y='8' width='20' height='3'/%3E%3Crect fill='%23FFF' x='6' y='13' width='16' height='3'/%3E%3Crect fill='%23FFF' x='6' y='18' width='18' height='3'/%3E%3Cpath fill='%2300AA00' d='M22 18 L26 22 L22 26 Z'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23CC0000' x='4' y='12' width='24' height='14' rx='1'/%3E%3Crect fill='%23FF3333' x='4' y='12' width='24' height='3'/%3E%3Crect fill='%23999' x='12' y='8' width='8' height='5' rx='1'/%3E%3Crect fill='%23666' x='13' y='9' width='6' height='3'/%3E%3Ccircle fill='%23FFD700' cx='10' cy='19' r='2'/%3E%3Cpath fill='%23C0C0C0' d='M16 18h8v2h-8z'/%3E%3Cpath fill='%23C0C0C0' d='M16 21h6v2h-6z'/%3E%3C/svg%3E",
       pos: { top: 140, left: 140 },
       size: { width: 600, height: 550 },
       content: (
@@ -605,7 +605,7 @@ export default function Portfolio() {
     },
     contact: {
       title: 'Contact Me',
-      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23CC0000' width='32' height='32'/%3E%3Crect fill='%23FFF' x='4' y='8' width='24' height='16'/%3E%3Cpath fill='%23CC0000' d='M4 8 L16 18 L28 8'/%3E%3Crect fill='%23CC0000' x='4' y='8' width='2' height='16'/%3E%3Crect fill='%23CC0000' x='26' y='8' width='2' height='16'/%3E%3Crect fill='%23CC0000' x='4' y='22' width='24' height='2'/%3E%3C/svg%3E",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23CC0000' x='6' y='4' width='20' height='24' rx='1'/%3E%3Crect fill='%23FF6666' x='6' y='4' width='20' height='3'/%3E%3Crect fill='%23990000' x='28' y='10' width='2' height='4'/%3E%3Crect fill='%23990000' x='28' y='16' width='2' height='4'/%3E%3Crect fill='%23990000' x='28' y='22' width='2' height='4'/%3E%3Ctext x='16' y='18' text-anchor='middle' fill='%23FFF' font-size='12' font-family='Arial' font-weight='bold'>@%3C/text%3E%3C/svg%3E",
       pos: { top: 160, left: 160 },
       size: { width: 500, height: 400 },
       content: (
