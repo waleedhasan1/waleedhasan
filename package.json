@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "@types/three": "^0.182.0",
     "@vercel/postgres": "^0.10.0",
+    "js-dos": "6.22",
     "leaflet": "^1.9.4",
     "next": "16.1.1",
     "openai": "^6.15.0",
@@ -18,7 +20,8 @@
     "react-dom": "19.2.3",
     "react-leaflet": "^5.0.0",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.21",

@@ -45,6 +45,11 @@ const WeatherRadarInline = dynamic(() => import('./components/WeatherRadarInline
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading radar...</div>
 })
 
+const BikeGameInline = dynamic(() => import('./components/BikeGameInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading bike game...</div>
+})
+
 interface Window {
   title: string
   icon: string
@@ -62,6 +67,17 @@ export default function Portfolio() {
   const [iconPositions, setIconPositions] = useState<Record<string, { x: number; y: number }>>({})
   const [windowZIndex, setWindowZIndex] = useState<Record<string, number>>({})
   const [highestZIndex, setHighestZIndex] = useState(100)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Detect mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const updateClock = () => {
@@ -91,8 +107,9 @@ export default function Portfolio() {
   const openWindow = (windowId: string) => {
     if (!openWindows.includes(windowId)) {
       setOpenWindows([...openWindows, windowId])
-      setMinimizedWindows(minimizedWindows.filter(id => id !== windowId))
     }
+    setMinimizedWindows(prev => prev.filter(id => id !== windowId))
+    bringToFront(windowId)
   }
 
   const closeWindow = (windowId: string) => {
@@ -282,7 +299,7 @@ export default function Portfolio() {
     },
     ctamap: {
       title: 'CTA Train Map',
-      icon: "/icons/ctamap.png",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23FFCC00' d='M3 6h10l2 3h14v17H3z'/%3E%3Cpath fill='%23FFE066' d='M3 6h10l2 3h14v2H3z'/%3E%3Cpath fill='%23CC9900' d='M3 25h26v1H3z'/%3E%3Cpath fill='%23FF0000' d='M8 14h3v8H8z'/%3E%3Cpath fill='%230000FF' d='M13 16h3v6h-3z'/%3E%3Cpath fill='%2300AA00' d='M18 13h3v9h-3z'/%3E%3C/svg%3E",
       pos: { top: 50, left: 100 },
       size: { width: 1000, height: 700 },
       content: (
@@ -315,7 +332,7 @@ export default function Portfolio() {
     },
     paint: {
       title: 'Paint',
-      icon: "/icons/paint.png",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse fill='%23C0C0C0' cx='16' cy='18' rx='13' ry='11'/%3E%3Cellipse fill='%23E0E0E0' cx='16' cy='17' rx='12' ry='10'/%3E%3Ccircle fill='%23FF0000' cx='10' cy='14' r='2'/%3E%3Ccircle fill='%230000FF' cx='16' cy='12' r='2'/%3E%3Ccircle fill='%23FFFF00' cx='22' cy='14' r='2'/%3E%3Ccircle fill='%2300FF00' cx='13' cy='19' r='2'/%3E%3Ccircle fill='%23FF00FF' cx='19' cy='19' r='2'/%3E%3Crect fill='%23A0826D' x='14' y='2' width='4' height='12' rx='2'/%3E%3C/svg%3E",
       pos: { top: 60, left: 250 },
       size: { width: 900, height: 700 },
       content: (
@@ -337,7 +354,7 @@ export default function Portfolio() {
     },
     ipod: {
       title: 'MP3 Player',
-      icon: "/icons/mp3.png",
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23333' width='32' height='32' rx='2'/%3E%3Ccircle fill='%23666' cx='8' cy='16' r='6'/%3E%3Ccircle fill='%23000' cx='8' cy='16' r='4'/%3E%3Ccircle fill='%23666' cx='24' cy='16' r='6'/%3E%3Ccircle fill='%23000' cx='24' cy='16' r='4'/%3E%3Crect fill='%2300AA00' x='12' y='8' width='8' height='6'/%3E%3Crect fill='%23004400' x='12' y='10' width='8' height='2'/%3E%3Crect fill='%23666' x='14' y='16' width='2' height='4'/%3E%3Crect fill='%23666' x='18' y='16' width='2' height='4'/%3E%3Crect fill='%23C0C0C0' x='13' y='4' width='6' height='2'/%3E%3C/svg%3E",
       pos: { top: 120, left: 400 },
       size: { width: 400, height: 600 },
       content: (
@@ -365,6 +382,17 @@ export default function Portfolio() {
       content: (
         <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
           <SnakeGameInline />
+        </div>
+      )
+    },
+    bikegame: {
+      title: 'Bike Game',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%233a3a3a' width='32' height='32' rx='2'/%3E%3Ccircle fill='none' stroke='%23C0C0C0' stroke-width='2' cx='10' cy='22' r='5'/%3E%3Ccircle fill='none' stroke='%23C0C0C0' stroke-width='2' cx='22' cy='22' r='5'/%3E%3Cpath fill='none' stroke='%23FFD700' stroke-width='2' d='M10 22L14 14L18 14L22 22'/%3E%3Ccircle fill='%23FFCC99' cx='14' cy='10' r='3'/%3E%3Cpath fill='%23ddcc00' d='M4 28h24v2H4z'/%3E%3C/svg%3E",
+      pos: { top: 80, left: 200 },
+      size: { width: 900, height: 700 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <BikeGameInline />
         </div>
       )
     },
@@ -717,6 +745,7 @@ export default function Portfolio() {
     { id: 'paint', label: 'Paint', icon: windows.paint.icon },
     { id: 'chat', label: 'Chat Room', icon: windows.chat.icon },
     { id: 'snake', label: 'Snake Game', icon: windows.snake.icon },
+    { id: 'bikegame', label: 'Bike Game', icon: windows.bikegame.icon },
     { id: 'ipod', label: 'MP3 Player', icon: windows.ipod.icon },
     { id: 'projects', label: 'Projects', icon: windows.projects.icon },
     { id: 'skills', label: 'Skills', icon: windows.skills.icon },
@@ -749,7 +778,6 @@ export default function Portfolio() {
           WALEED HASAN OS
         </div>
         <div className="loading-bar-container" style={{
-          width: 300,
           height: 30,
           background: '#C0C0C0',
           border: '2px inset #DFDFDF',
@@ -764,20 +792,21 @@ export default function Portfolio() {
         </div>
       </div>
 
-      <div className="desktop">
+      <div className={`desktop ${isMobile ? 'desktop-mobile' : ''}`}>
         {desktopIcons.map((icon, index) => (
-          <div 
+          <div
             key={icon.id}
             id={`icon-${icon.id}`}
-            className="desktop-icon" 
-            onDoubleClick={() => openWindow(icon.id)}
-            onMouseDown={(e) => startIconDrag(e, icon.id)}
-            style={{
+            className="desktop-icon"
+            onDoubleClick={() => !isMobile && openWindow(icon.id)}
+            onClick={() => isMobile && openWindow(icon.id)}
+            onMouseDown={(e) => !isMobile && startIconDrag(e, icon.id)}
+            style={!isMobile ? {
               position: 'absolute',
               left: iconPositions[icon.id]?.x ?? (20 + (index % 2) * 100),
               top: iconPositions[icon.id]?.y ?? (20 + Math.floor(index / 2) * 100),
               cursor: dragging === `icon-${icon.id}` ? 'grabbing' : 'pointer'
-            }}
+            } : undefined}
           >
             <img src={icon.icon} alt={icon.label} />
             <span>{icon.label}</span>
@@ -802,7 +831,7 @@ export default function Portfolio() {
           }}
           onMouseDown={() => bringToFront(id)}
         >
-          <div className="window-title-bar" onMouseDown={(e) => startDrag(e, id)}>
+          <div className="window-title-bar" onMouseDown={(e) => !isMobile && startDrag(e, id)}>
             <div className="window-title">
               <img src={win.icon} alt="" />
               {win.title}
@@ -813,94 +842,37 @@ export default function Portfolio() {
               <button className="window-button close" onClick={() => closeWindow(id)}>×</button>
             </div>
           </div>
-          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar') ? 0 : 16 }}>
+          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame') ? 0 : 16 }}>
             {win.content}
           </div>
         </div>
       ))}
 
-      <div className="taskbar" style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 40,
-        background: '#C0C0C0',
-        borderTop: '2px solid #FFFFFF',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 4px',
-        gap: 4,
-        fontFamily: 'MS Sans Serif, Arial, sans-serif',
-        fontSize: 11,
-        zIndex: 1000
-      }}>
-        <button className="start-button" style={{
-          background: '#C0C0C0',
-          border: '2px outset #DFDFDF',
-          padding: '4px 8px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 4,
-          cursor: 'pointer',
-          fontWeight: 'bold',
-          fontSize: 11
-        }}
-        onMouseDown={(e) => e.currentTarget.style.border = '2px inset #DFDFDF'}
-        onMouseUp={(e) => e.currentTarget.style.border = '2px outset #DFDFDF'}
-        onMouseLeave={(e) => e.currentTarget.style.border = '2px outset #DFDFDF'}
-        >
-          <img className="start-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M3 3h8v8H3zm0 10h8v8H3zm10-10h8v8h-8zm0 10h8v8h-8z'/%3E%3C/svg%3E" alt="Start" style={{ width: 16, height: 16 }} />
+      <div className="taskbar">
+        <button className="start-button">
+          <img className="start-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M3 3h8v8H3zm0 10h8v8H3zm10-10h8v8h-8zm0 10h8v8h-8z'/%3E%3C/svg%3E" alt="Start" />
           <span>Start</span>
         </button>
-        <div className="taskbar-items" style={{
-          flex: 1,
-          display: 'flex',
-          gap: 2,
-          overflowX: 'auto'
-        }}>
+        <div className="taskbar-items">
           {openWindows.map(id => (
-            <div 
-              key={id} 
+            <div
+              key={id}
               className={`taskbar-item ${minimizedWindows.includes(id) ? '' : 'active'}`}
-              style={{
-                background: minimizedWindows.includes(id) ? '#C0C0C0' : '#FFFFFF',
-                border: minimizedWindows.includes(id) ? '2px outset #DFDFDF' : '2px inset #DFDFDF',
-                padding: '4px 8px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 4,
-                cursor: 'pointer',
-                minWidth: 120,
-                maxWidth: 160
-              }}
               onClick={() => {
                 if (minimizedWindows.includes(id)) {
                   restoreWindow(id)
+                  bringToFront(id)
                 } else {
                   minimizeWindow(id)
                 }
               }}
             >
-              <img src={windows[id].icon} alt="" style={{ width: 16, height: 16 }} />
-              <span style={{ 
-                overflow: 'hidden', 
-                textOverflow: 'ellipsis', 
-                whiteSpace: 'nowrap',
-                color: '#000'
-              }}>{windows[id].title}</span>
+              <img src={windows[id].icon} alt="" />
+              <span>{windows[id].title}</span>
             </div>
           ))}
         </div>
-        <div className="system-tray" style={{
-          background: '#C0C0C0',
-          border: '2px inset #DFDFDF',
-          padding: '4px 8px',
-          minWidth: 80,
-          textAlign: 'center',
-          fontWeight: 'bold',
-          color: '#000'
-        }}>
+        <div className="system-tray">
           <span>{time}</span>
         </div>
       </div>

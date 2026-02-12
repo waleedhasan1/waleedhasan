@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   description: 'Developer portfolio styled as a retro OS',
 }
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
 export default function RootLayout({
   children,
 }: {
