@@ -302,14 +302,13 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 40px;
-    background: linear-gradient(180deg, #3C8CF7 0%, #245EDC 100%);
-    border-top: 2px solid #2859C6;
+    height: 34px;
+    background: #C0C0C0;
+    border-top: 2px outset #DFDFDF;
     display: flex;
     align-items: center;
-    padding: 0 4px;
+    padding: 2px 4px;
     gap: 4px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
     z-index: 1000;
     font-family: 'MS Sans Serif', Arial, sans-serif;
     font-size: 11px;
@@ -317,84 +316,83 @@ body {
 
 @media (max-width: 768px) {
     .taskbar {
-        height: 50px;
-        padding: 0 2px;
+        height: 44px;
+        padding: 2px 2px;
     }
 }
 
 .start-button {
-    height: 32px;
-    padding: 0 12px;
-    background: linear-gradient(180deg, #6EC05F 0%, #3DA335 100%);
-    border: 1px solid;
-    border-color: #76B541 #2D8C25 #2D8C25 #76B541;
-    border-radius: 3px;
-    color: white;
+    height: 26px;
+    padding: 0 6px;
+    background: #C0C0C0;
+    border: 2px outset #DFDFDF;
+    color: #000;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 12px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     cursor: pointer;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
     .start-button {
-        height: 40px;
-        padding: 0 8px;
+        height: 36px;
+        padding: 0 6px;
         font-size: 12px;
     }
 }
 
 .start-button:hover {
-    background: linear-gradient(180deg, #7ED86F 0%, #4AB542 100%);
+    background: #D0D0D0;
 }
 
 .start-button:active {
-    background: linear-gradient(180deg, #5BA84E 0%, #2D8C25 100%);
-    border-color: #2D8C25 #76B541 #76B541 #2D8C25;
+    border: 2px inset #808080;
 }
 
 .start-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     image-rendering: pixelated;
 }
 
 .taskbar-items {
     flex: 1;
     display: flex;
-    gap: 4px;
-    margin-left: 8px;
+    gap: 2px;
+    margin-left: 4px;
     overflow-x: auto;
     overflow-y: hidden;
+    border-left: 1px solid #808080;
+    padding-left: 4px;
 }
 
 @media (max-width: 768px) {
     .taskbar-items {
         gap: 2px;
-        margin-left: 4px;
+        margin-left: 2px;
         -webkit-overflow-scrolling: touch;
     }
-    
+
     .taskbar-items::-webkit-scrollbar {
         height: 0;
     }
 }
 
 .taskbar-item {
-    height: 28px;
-    padding: 0 12px;
-    background: linear-gradient(180deg, #5C9EE7 0%, #3570C8 100%);
-    border: 1px solid #2859C6;
-    color: white;
-    font-size: 12px;
+    height: 22px;
+    padding: 0 8px;
+    background: #C0C0C0;
+    border: 2px outset #DFDFDF;
+    color: #000;
+    font-size: 11px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     cursor: pointer;
-    min-width: 120px;
+    min-width: 100px;
     max-width: 160px;
     flex-shrink: 0;
     touch-action: manipulation;
@@ -408,28 +406,28 @@ body {
 
 @media (max-width: 768px) {
     .taskbar-item {
-        height: 40px;
-        padding: 0 8px;
+        height: 34px;
+        padding: 0 6px;
         font-size: 11px;
-        min-width: 100px;
+        min-width: 90px;
         max-width: 150px;
     }
-    
+
     .taskbar-item img {
-        width: 20px !important;
-        height: 20px !important;
+        width: 18px !important;
+        height: 18px !important;
     }
 }
 
 .taskbar-item:hover {
-    background: linear-gradient(180deg, #6CAEF7 0%, #4580D8 100%);
+    background: #D0D0D0;
 }
 
 .taskbar-item.active {
-    background: linear-gradient(180deg, #ECE9D8 0%, #C0C7D8 100%);
-    color: black;
-    border-color: #003C74 white white #003C74;
-    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+    border: 2px inset #808080;
+    background: #B0B0B0;
+    color: #000;
+    font-weight: bold;
 }
 
 .taskbar-item img {
@@ -440,22 +438,21 @@ body {
 
 .system-tray {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
-    padding: 0 8px;
-    color: white;
-    font-size: 12px;
-    background: rgba(0, 0, 0, 0.1);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    height: 100%;
-    min-width: 70px;
+    padding: 2px 8px;
+    color: #000;
+    font-size: 11px;
+    border: 2px inset #808080;
+    height: 22px;
+    min-width: 65px;
     justify-content: center;
-    font-weight: bold;
+    font-family: 'Courier New', monospace;
 }
 
 @media (max-width: 768px) {
     .system-tray {
-        padding: 0 4px;
+        padding: 2px 4px;
         font-size: 10px;
         gap: 4px;
     }

@@ -50,6 +50,11 @@ const BikeGameInline = dynamic(() => import('./components/BikeGameInline'), {
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading bike game...</div>
 })
 
+const NBAShortChartInline = dynamic(() => import('./components/NBAShortChartInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading shot chart...</div>
+})
+
 interface Window {
   title: string
   icon: string
@@ -393,6 +398,17 @@ export default function Portfolio() {
       content: (
         <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
           <BikeGameInline />
+        </div>
+      )
+    },
+    nbashotchart: {
+      title: 'NBA Shot Chart',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23F4A460' width='32' height='32' rx='2'/%3E%3Ccircle fill='none' stroke='%23000' stroke-width='1.5' cx='16' cy='16' r='10'/%3E%3Ccircle fill='none' stroke='%23000' stroke-width='1.5' cx='16' cy='16' r='5'/%3E%3Crect fill='%23000' x='6' y='15' width='20' height='2'/%3E%3Crect fill='%23000' x='15' y='6' width='2' height='20'/%3E%3Ccircle fill='%2300CC00' cx='12' cy='12' r='2'/%3E%3Ccircle fill='%23CC0000' cx='20' cy='10' r='2'/%3E%3Ccircle fill='%2300CC00' cx='22' cy='20' r='2'/%3E%3Ccircle fill='%23CC0000' cx='10' cy='22' r='2'/%3E%3C/svg%3E",
+      pos: { top: 90, left: 250 },
+      size: { width: 620, height: 750 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <NBAShortChartInline />
         </div>
       )
     },
@@ -747,6 +763,7 @@ export default function Portfolio() {
     { id: 'snake', label: 'Snake Game', icon: windows.snake.icon },
     { id: 'bikegame', label: 'Bike Game', icon: windows.bikegame.icon },
     { id: 'ipod', label: 'MP3 Player', icon: windows.ipod.icon },
+    { id: 'nbashotchart', label: 'NBA Shots', icon: windows.nbashotchart.icon },
     { id: 'projects', label: 'Projects', icon: windows.projects.icon },
     { id: 'skills', label: 'Skills', icon: windows.skills.icon },
     { id: 'contact', label: 'Contact', icon: windows.contact.icon }
@@ -842,7 +859,7 @@ export default function Portfolio() {
               <button className="window-button close" onClick={() => closeWindow(id)}>×</button>
             </div>
           </div>
-          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame') ? 0 : 16 }}>
+          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame' || id === 'nbashotchart') ? 0 : 16 }}>
             {win.content}
           </div>
         </div>
