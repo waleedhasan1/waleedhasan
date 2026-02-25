@@ -1,0 +1,401 @@
+{
+  "1": [
+    {"artist":"Japanese Breakfast","date":"2026-03-07","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Dinosaur Jr.","date":"2026-03-21","time":"8:30 PM","price":"$38","soldOut":false},
+    {"artist":"Interpol","date":"2026-04-04","time":"8:00 PM","price":"$45","soldOut":true},
+    {"artist":"The Breeders","date":"2026-04-18","time":"8:00 PM","price":"$40","soldOut":false},
+    {"artist":"Yo La Tengo","date":"2026-05-09","time":"7:30 PM","price":"$35","soldOut":false}
+  ],
+  "2": [
+    {"artist":"Horsegirl","date":"2026-03-05","time":"9:00 PM","price":"$18","soldOut":false},
+    {"artist":"Dehd","date":"2026-03-14","time":"9:00 PM","price":"$20","soldOut":false},
+    {"artist":"Friko","date":"2026-03-28","time":"9:00 PM","price":"$16","soldOut":true},
+    {"artist":"Deeper","date":"2026-04-11","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Moontype","date":"2026-05-02","time":"9:00 PM","price":"$14","soldOut":false}
+  ],
+  "3": [
+    {"artist":"Waxahatchee","date":"2026-03-12","time":"8:00 PM","price":"$30","soldOut":false},
+    {"artist":"Soccer Mommy","date":"2026-03-26","time":"8:00 PM","price":"$28","soldOut":false},
+    {"artist":"Big Thief","date":"2026-04-09","time":"8:00 PM","price":"$35","soldOut":true},
+    {"artist":"Angel Olsen","date":"2026-05-15","time":"8:00 PM","price":"$32","soldOut":false}
+  ],
+  "4": [
+    {"artist":"Faye Webster","date":"2026-03-08","time":"8:00 PM","price":"$25","soldOut":true},
+    {"artist":"Ratboys","date":"2026-03-22","time":"8:30 PM","price":"$18","soldOut":false},
+    {"artist":"Kara Jackson","date":"2026-04-05","time":"8:00 PM","price":"$22","soldOut":false},
+    {"artist":"Gia Margaret","date":"2026-04-19","time":"8:00 PM","price":"$20","soldOut":false}
+  ],
+  "5": [
+    {"artist":"Ryley Walker","date":"2026-03-06","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Circuit des Yeux","date":"2026-03-20","time":"9:00 PM","price":"$18","soldOut":false},
+    {"artist":"NNAMDÏ","date":"2026-04-10","time":"9:00 PM","price":"$16","soldOut":false},
+    {"artist":"Tortoise","date":"2026-05-01","time":"8:30 PM","price":"$25","soldOut":true}
+  ],
+  "6": [
+    {"artist":"Local H","date":"2026-03-13","time":"8:00 PM","price":"$25","soldOut":false},
+    {"artist":"Smoking Popes","date":"2026-03-27","time":"8:00 PM","price":"$22","soldOut":false},
+    {"artist":"Duster","date":"2026-04-17","time":"8:30 PM","price":"$28","soldOut":false}
+  ],
+  "7": [
+    {"artist":"Divino Niño","date":"2026-03-10","time":"9:00 PM","price":"$20","soldOut":false},
+    {"artist":"Corridor","date":"2026-03-24","time":"9:00 PM","price":"$18","soldOut":false},
+    {"artist":"Locate S,1","date":"2026-04-07","time":"9:00 PM","price":"$16","soldOut":false},
+    {"artist":"Enumclaw","date":"2026-05-08","time":"9:00 PM","price":"$20","soldOut":false}
+  ],
+  "8": [
+    {"artist":"Rookie","date":"2026-03-11","time":"8:30 PM","price":"$15","soldOut":false},
+    {"artist":"Meat Wave","date":"2026-03-25","time":"9:00 PM","price":"$14","soldOut":false},
+    {"artist":"Slow Pulp","date":"2026-04-15","time":"8:00 PM","price":"$18","soldOut":false}
+  ],
+  "9": [
+    {"artist":"Oozing Wound","date":"2026-03-09","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Makaya McCraven","date":"2026-03-23","time":"8:30 PM","price":"$25","soldOut":true},
+    {"artist":"Lia Kohl","date":"2026-04-06","time":"8:30 PM","price":"$16","soldOut":false},
+    {"artist":"Natural Information Society","date":"2026-04-20","time":"8:00 PM","price":"$20","soldOut":false}
+  ],
+  "10": [
+    {"artist":"JC Brooks & the Uptown Sound","date":"2026-03-14","time":"8:30 PM","price":"$18","soldOut":false},
+    {"artist":"Tributosaurus becomes Bowie","date":"2026-03-28","time":"9:00 PM","price":"$25","soldOut":true},
+    {"artist":"The Handsome Family","date":"2026-04-11","time":"8:00 PM","price":"$20","soldOut":false},
+    {"artist":"Dolly Varden","date":"2026-05-16","time":"8:00 PM","price":"$18","soldOut":false}
+  ],
+  "11": [
+    {"artist":"Patricia Barber Trio","date":"2026-03-06","time":"9:00 PM","price":"$20","soldOut":false},
+    {"artist":"Kurt Elling","date":"2026-03-13","time":"9:00 PM","price":"$25","soldOut":true},
+    {"artist":"Mike Reed's People, Places & Things","date":"2026-03-27","time":"9:00 PM","price":"$18","soldOut":false},
+    {"artist":"Marquis Hill","date":"2026-04-10","time":"9:00 PM","price":"$22","soldOut":false},
+    {"artist":"Sunday Poetry Slam","date":"2026-04-12","time":"7:00 PM","price":"$8","soldOut":false}
+  ],
+  "12": [
+    {"artist":"Andy's All-Stars","date":"2026-03-05","time":"6:30 PM","price":"$15","soldOut":false},
+    {"artist":"Ernie Adams Quartet","date":"2026-03-12","time":"8:30 PM","price":"$18","soldOut":false},
+    {"artist":"Fridays After Work Jazz","date":"2026-03-20","time":"5:00 PM","price":"$12","soldOut":false},
+    {"artist":"Chicago Jazz Philharmonic","date":"2026-04-09","time":"8:00 PM","price":"$25","soldOut":false}
+  ],
+  "13": [
+    {"artist":"Dana Hall Trio","date":"2026-03-07","time":"8:00 PM","price":"$25","soldOut":false},
+    {"artist":"Dee Alexander","date":"2026-03-21","time":"8:00 PM","price":"$30","soldOut":false},
+    {"artist":"Ari Brown Quartet","date":"2026-04-04","time":"8:00 PM","price":"$25","soldOut":false},
+    {"artist":"Jeremy Kahn Trio","date":"2026-04-18","time":"8:00 PM","price":"$22","soldOut":false}
+  ],
+  "14": [
+    {"artist":"Linsey Alexander","date":"2026-03-06","time":"9:30 PM","price":"$15","soldOut":false},
+    {"artist":"Billy Branch & the SOBs","date":"2026-03-13","time":"9:30 PM","price":"$15","soldOut":false},
+    {"artist":"Toronzo Cannon","date":"2026-03-27","time":"9:30 PM","price":"$15","soldOut":false},
+    {"artist":"Lurrie Bell","date":"2026-04-10","time":"9:30 PM","price":"$15","soldOut":false}
+  ],
+  "15": [
+    {"artist":"Johnny Drummer","date":"2026-03-07","time":"9:00 PM","price":"$12","soldOut":false},
+    {"artist":"Pistol Pete","date":"2026-03-14","time":"9:00 PM","price":"$12","soldOut":false},
+    {"artist":"Big Ray & the Chicago Kool-Aid","date":"2026-03-28","time":"9:00 PM","price":"$12","soldOut":false}
+  ],
+  "16": [
+    {"artist":"Nellie Tiger Travis","date":"2026-03-08","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Demetria Taylor","date":"2026-03-22","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Carlos Johnson","date":"2026-04-05","time":"9:00 PM","price":"$15","soldOut":false}
+  ],
+  "17": [
+    {"artist":"Buddy Guy","date":"2026-03-14","time":"8:00 PM","price":"$65","soldOut":true},
+    {"artist":"Shemekia Copeland","date":"2026-03-28","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Christone 'Kingfish' Ingram","date":"2026-04-11","time":"8:00 PM","price":"$40","soldOut":false},
+    {"artist":"Ronnie Baker Brooks","date":"2026-04-25","time":"8:00 PM","price":"$30","soldOut":false}
+  ],
+  "18": [
+    {"artist":"Branford Marsalis Quartet","date":"2026-03-13","time":"8:00 PM","price":"$40","soldOut":true},
+    {"artist":"Avishai Cohen Trio","date":"2026-03-27","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Joey DeFrancesco","date":"2026-04-10","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Miguel Zenón Quartet","date":"2026-05-01","time":"8:00 PM","price":"$30","soldOut":false}
+  ],
+  "19": [
+    {"artist":"DJ Heather","date":"2026-03-07","time":"10:00 PM","price":"$20","soldOut":false},
+    {"artist":"The Black Madonna","date":"2026-03-14","time":"10:00 PM","price":"$25","soldOut":true},
+    {"artist":"Derrick Carter","date":"2026-03-28","time":"10:00 PM","price":"$20","soldOut":false},
+    {"artist":"Honey Dijon","date":"2026-04-11","time":"10:00 PM","price":"$30","soldOut":true},
+    {"artist":"Gene Farris","date":"2026-04-25","time":"10:00 PM","price":"$18","soldOut":false}
+  ],
+  "20": [
+    {"artist":"Traumprinz","date":"2026-03-06","time":"10:00 PM","price":"$25","soldOut":false},
+    {"artist":"DJ Sneak","date":"2026-03-20","time":"10:00 PM","price":"$20","soldOut":false},
+    {"artist":"Mark Farina","date":"2026-04-03","time":"10:00 PM","price":"$25","soldOut":false},
+    {"artist":"Doc Martin","date":"2026-04-17","time":"10:00 PM","price":"$22","soldOut":false}
+  ],
+  "21": [
+    {"artist":"Tchami","date":"2026-03-13","time":"10:00 PM","price":"$35","soldOut":false},
+    {"artist":"Claude VonStroke","date":"2026-03-27","time":"10:00 PM","price":"$30","soldOut":false},
+    {"artist":"Green Velvet","date":"2026-04-10","time":"10:00 PM","price":"$35","soldOut":true},
+    {"artist":"Vintage Culture","date":"2026-05-01","time":"10:00 PM","price":"$40","soldOut":false}
+  ],
+  "22": [
+    {"artist":"Garrett David","date":"2026-03-07","time":"10:00 PM","price":"$15","soldOut":false},
+    {"artist":"Ariel Zetina","date":"2026-03-21","time":"10:00 PM","price":"$15","soldOut":false},
+    {"artist":"Beau Wanzer","date":"2026-04-04","time":"10:00 PM","price":"$18","soldOut":false}
+  ],
+  "23": [
+    {"artist":"Zedd","date":"2026-03-21","time":"9:00 PM","price":"$55","soldOut":false},
+    {"artist":"Illenium","date":"2026-04-04","time":"9:00 PM","price":"$65","soldOut":true},
+    {"artist":"Kaskade","date":"2026-04-18","time":"9:00 PM","price":"$50","soldOut":false},
+    {"artist":"Subtronics","date":"2026-05-09","time":"9:00 PM","price":"$45","soldOut":false}
+  ],
+  "24": [
+    {"artist":"Rahaan","date":"2026-03-06","time":"10:00 PM","price":"$10","soldOut":false},
+    {"artist":"Michael Serafini","date":"2026-03-20","time":"10:00 PM","price":"$10","soldOut":false},
+    {"artist":"Sevron","date":"2026-04-03","time":"10:00 PM","price":"$12","soldOut":false}
+  ],
+  "25": [
+    {"artist":"Noname","date":"2026-03-14","time":"8:00 PM","price":"$35","soldOut":true},
+    {"artist":"Jamila Woods","date":"2026-03-28","time":"8:00 PM","price":"$28","soldOut":false},
+    {"artist":"Ravyn Lenae","date":"2026-04-11","time":"8:00 PM","price":"$30","soldOut":false},
+    {"artist":"Kweku Collins","date":"2026-05-02","time":"8:00 PM","price":"$25","soldOut":false}
+  ],
+  "26": [
+    {"artist":"Polo G","date":"2026-03-13","time":"9:00 PM","price":"$45","soldOut":true},
+    {"artist":"Lucki","date":"2026-03-27","time":"9:00 PM","price":"$35","soldOut":false},
+    {"artist":"Femdot","date":"2026-04-10","time":"9:00 PM","price":"$25","soldOut":false},
+    {"artist":"CupcakKe","date":"2026-04-24","time":"9:00 PM","price":"$30","soldOut":false}
+  ],
+  "27": [
+    {"artist":"Mother Nature","date":"2026-03-12","time":"8:30 PM","price":"$20","soldOut":false},
+    {"artist":"Defcee & Boathouse","date":"2026-03-26","time":"8:30 PM","price":"$18","soldOut":false},
+    {"artist":"Pivot Gang Night","date":"2026-04-09","time":"8:00 PM","price":"$22","soldOut":false}
+  ],
+  "28": [
+    {"artist":"Saba","date":"2026-03-07","time":"8:00 PM","price":"$40","soldOut":true},
+    {"artist":"Helado Negro","date":"2026-03-21","time":"8:00 PM","price":"$28","soldOut":false},
+    {"artist":"Sudan Archives","date":"2026-04-04","time":"8:00 PM","price":"$30","soldOut":false},
+    {"artist":"Mick Jenkins","date":"2026-04-18","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Cate Le Bon","date":"2026-05-09","time":"8:00 PM","price":"$28","soldOut":false}
+  ],
+  "29": [
+    {"artist":"CSO: Muti Conducts Brahms","date":"2026-03-12","time":"7:30 PM","price":"$45–$250","soldOut":false},
+    {"artist":"CSO: Hilary Hahn Plays Dvořák","date":"2026-03-26","time":"7:30 PM","price":"$50–$275","soldOut":true},
+    {"artist":"CSO: Mahler Symphony No. 2","date":"2026-04-09","time":"7:30 PM","price":"$45–$250","soldOut":false},
+    {"artist":"CSO: John Williams Film Night","date":"2026-05-14","time":"7:30 PM","price":"$55–$300","soldOut":true}
+  ],
+  "30": [
+    {"artist":"Hubbard Street Dance: Spring Series","date":"2026-03-13","time":"7:30 PM","price":"$30–$95","soldOut":false},
+    {"artist":"Joffrey Ballet: Romeo & Juliet","date":"2026-04-02","time":"7:30 PM","price":"$35–$185","soldOut":false},
+    {"artist":"Eighth Blackbird","date":"2026-04-16","time":"7:30 PM","price":"$25–$55","soldOut":false},
+    {"artist":"Chicago Opera Theater: La Bohème","date":"2026-05-07","time":"7:30 PM","price":"$40–$125","soldOut":false}
+  ],
+  "31": [
+    {"artist":"Pacifica Quartet","date":"2026-03-08","time":"3:00 PM","price":"$20","soldOut":false},
+    {"artist":"UChicago New Music Ensemble","date":"2026-03-22","time":"7:30 PM","price":"$15","soldOut":false},
+    {"artist":"Spektral Quartet","date":"2026-04-12","time":"7:30 PM","price":"$25","soldOut":false}
+  ],
+  "32": [
+    {"artist":"Bienen Contemporary Ensemble","date":"2026-03-10","time":"7:30 PM","price":"$10","soldOut":false},
+    {"artist":"NU Symphony Orchestra","date":"2026-03-24","time":"7:30 PM","price":"$15","soldOut":false},
+    {"artist":"Ades: Chamber Works","date":"2026-04-14","time":"7:30 PM","price":"$12","soldOut":false}
+  ],
+  "33": [
+    {"artist":"Whitey Morgan","date":"2026-03-07","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Country Karaoke Night","date":"2026-03-14","time":"9:00 PM","price":"Free","soldOut":false},
+    {"artist":"Robbie Fulks","date":"2026-03-28","time":"9:00 PM","price":"$18","soldOut":false},
+    {"artist":"Two-Step Tuesdays","date":"2026-04-07","time":"8:00 PM","price":"$5","soldOut":false}
+  ],
+  "34": [
+    {"artist":"Jon Langford & the Waco Brothers","date":"2026-03-06","time":"8:30 PM","price":"$20","soldOut":false},
+    {"artist":"Pokey LaFarge","date":"2026-03-20","time":"8:30 PM","price":"$25","soldOut":true},
+    {"artist":"Cedric Burnside","date":"2026-04-03","time":"8:30 PM","price":"$22","soldOut":false},
+    {"artist":"Los Lobos","date":"2026-04-17","time":"8:00 PM","price":"$35","soldOut":false}
+  ],
+  "35": [
+    {"artist":"Luke Combs Tribute Night","date":"2026-03-13","time":"9:00 PM","price":"$12","soldOut":false},
+    {"artist":"DJ Honky Tonk","date":"2026-03-20","time":"9:00 PM","price":"$8","soldOut":false},
+    {"artist":"Nashville Songwriters Round","date":"2026-04-03","time":"8:00 PM","price":"$15","soldOut":false}
+  ],
+  "36": [
+    {"artist":"Civic Rust","date":"2026-03-06","time":"9:00 PM","price":"$12","soldOut":false},
+    {"artist":"Pelican","date":"2026-03-20","time":"8:30 PM","price":"$22","soldOut":true},
+    {"artist":"Weekend Nachos Reunion","date":"2026-04-03","time":"9:00 PM","price":"$18","soldOut":false},
+    {"artist":"Indian","date":"2026-04-17","time":"9:00 PM","price":"$15","soldOut":false}
+  ],
+  "37": [
+    {"artist":"C.H.E.W.","date":"2026-03-07","time":"9:00 PM","price":"$10","soldOut":false},
+    {"artist":"Luggage","date":"2026-03-21","time":"9:00 PM","price":"$10","soldOut":false},
+    {"artist":"Cell Rot","date":"2026-04-04","time":"9:00 PM","price":"$10","soldOut":false}
+  ],
+  "38": [
+    {"artist":"The Brokedowns","date":"2026-03-08","time":"9:00 PM","price":"$10","soldOut":false},
+    {"artist":"Direct Hit!","date":"2026-03-22","time":"9:00 PM","price":"$12","soldOut":false},
+    {"artist":"Typesetter","date":"2026-04-05","time":"9:00 PM","price":"$10","soldOut":false}
+  ],
+  "39": [
+    {"artist":"Municipal Waste","date":"2026-03-13","time":"7:30 PM","price":"$25","soldOut":false},
+    {"artist":"Eyehategod","date":"2026-03-27","time":"8:00 PM","price":"$22","soldOut":false},
+    {"artist":"Negative Approach","date":"2026-04-10","time":"8:00 PM","price":"$20","soldOut":false},
+    {"artist":"Earth Crisis","date":"2026-04-24","time":"7:30 PM","price":"$22","soldOut":false}
+  ],
+  "40": [
+    {"artist":"Khruangbin","date":"2026-03-14","time":"8:00 PM","price":"$55","soldOut":true},
+    {"artist":"Beach House","date":"2026-03-28","time":"8:00 PM","price":"$48","soldOut":true},
+    {"artist":"Father John Misty","date":"2026-04-11","time":"8:00 PM","price":"$50","soldOut":false},
+    {"artist":"The War on Drugs","date":"2026-05-02","time":"7:30 PM","price":"$55","soldOut":false}
+  ],
+  "41": [
+    {"artist":"Tyler, the Creator","date":"2026-04-04","time":"8:00 PM","price":"$75","soldOut":true},
+    {"artist":"Tame Impala","date":"2026-04-18","time":"8:00 PM","price":"$70","soldOut":true},
+    {"artist":"The Smashing Pumpkins","date":"2026-05-09","time":"7:30 PM","price":"$65","soldOut":false},
+    {"artist":"LCD Soundsystem","date":"2026-05-23","time":"8:00 PM","price":"$72","soldOut":false}
+  ],
+  "42": [
+    {"artist":"St. Vincent","date":"2026-03-12","time":"8:00 PM","price":"$45","soldOut":false},
+    {"artist":"Mac DeMarco","date":"2026-03-26","time":"8:00 PM","price":"$42","soldOut":true},
+    {"artist":"Mitski","date":"2026-04-09","time":"8:00 PM","price":"$48","soldOut":true},
+    {"artist":"King Gizzard & the Lizard Wizard","date":"2026-05-14","time":"7:30 PM","price":"$45","soldOut":false}
+  ],
+  "43": [
+    {"artist":"Four Tet","date":"2026-03-07","time":"9:00 PM","price":"$40","soldOut":false},
+    {"artist":"100 gecs","date":"2026-03-21","time":"8:00 PM","price":"$35","soldOut":true},
+    {"artist":"Jamie xx","date":"2026-04-04","time":"9:00 PM","price":"$45","soldOut":true},
+    {"artist":"Charli XCX","date":"2026-04-25","time":"8:00 PM","price":"$55","soldOut":true}
+  ],
+  "44": [
+    {"artist":"Gary Clark Jr.","date":"2026-03-13","time":"8:00 PM","price":"$50","soldOut":false},
+    {"artist":"Black Pumas","date":"2026-03-27","time":"8:00 PM","price":"$45","soldOut":true},
+    {"artist":"Leon Bridges","date":"2026-04-10","time":"8:00 PM","price":"$55","soldOut":false},
+    {"artist":"Marcus King","date":"2026-04-24","time":"8:00 PM","price":"$40","soldOut":false}
+  ],
+  "45": [
+    {"artist":"Iron & Wine","date":"2026-03-08","time":"8:00 PM","price":"$42","soldOut":false},
+    {"artist":"Andrew Bird","date":"2026-03-22","time":"8:00 PM","price":"$50","soldOut":true},
+    {"artist":"Wilco (acoustic set)","date":"2026-04-12","time":"7:30 PM","price":"$65","soldOut":true},
+    {"artist":"Neko Case","date":"2026-05-03","time":"8:00 PM","price":"$40","soldOut":false}
+  ],
+  "46": [
+    {"artist":"Bon Iver","date":"2026-03-21","time":"7:30 PM","price":"$70","soldOut":true},
+    {"artist":"Arcade Fire","date":"2026-04-04","time":"7:30 PM","price":"$65","soldOut":false},
+    {"artist":"Radiohead","date":"2026-05-09","time":"7:30 PM","price":"$95","soldOut":true},
+    {"artist":"Phoebe Bridgers","date":"2026-05-23","time":"7:30 PM","price":"$60","soldOut":true}
+  ],
+  "47": [
+    {"artist":"Kendrick Lamar","date":"2026-04-11","time":"8:00 PM","price":"$85–$250","soldOut":true},
+    {"artist":"Bad Bunny","date":"2026-04-25","time":"8:00 PM","price":"$90–$350","soldOut":true},
+    {"artist":"Billy Joel","date":"2026-05-16","time":"8:00 PM","price":"$95–$400","soldOut":false},
+    {"artist":"Morgan Wallen","date":"2026-06-06","time":"7:30 PM","price":"$80–$300","soldOut":false}
+  ],
+  "48": [
+    {"artist":"Taylor Swift - Eras Tour","date":"2026-06-12","time":"7:00 PM","price":"$125–$800","soldOut":true},
+    {"artist":"Dead & Company","date":"2026-07-04","time":"6:30 PM","price":"$75–$250","soldOut":false},
+    {"artist":"Foo Fighters","date":"2026-07-18","time":"7:00 PM","price":"$80–$275","soldOut":false}
+  ],
+  "49": [
+    {"artist":"Mdou Moctar","date":"2026-03-06","time":"8:30 PM","price":"$25","soldOut":false},
+    {"artist":"Nourished by Time","date":"2026-03-20","time":"8:30 PM","price":"$22","soldOut":false},
+    {"artist":"Lifeguard","date":"2026-04-03","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Model/Actriz","date":"2026-04-17","time":"8:30 PM","price":"$20","soldOut":false}
+  ],
+  "50": [
+    {"artist":"Jeff Tweedy","date":"2026-03-14","time":"8:00 PM","price":"$40","soldOut":true},
+    {"artist":"Aoife O'Donovan","date":"2026-03-28","time":"8:00 PM","price":"$30","soldOut":false},
+    {"artist":"Richard Thompson","date":"2026-04-11","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Billy Strings","date":"2026-05-02","time":"8:00 PM","price":"$45","soldOut":true}
+  ],
+  "51": [
+    {"artist":"Bomba de Aquí","date":"2026-03-08","time":"7:00 PM","price":"$15","soldOut":false},
+    {"artist":"Plena Libre","date":"2026-03-22","time":"7:00 PM","price":"$20","soldOut":false},
+    {"artist":"Los Pleneros de la 21","date":"2026-04-05","time":"7:00 PM","price":"$18","soldOut":false}
+  ],
+  "52": [
+    {"artist":"Toots & the Maytals Tribute","date":"2026-03-07","time":"9:00 PM","price":"$18","soldOut":false},
+    {"artist":"Midnite","date":"2026-03-21","time":"9:00 PM","price":"$20","soldOut":false},
+    {"artist":"Yellowman","date":"2026-04-04","time":"9:00 PM","price":"$25","soldOut":false},
+    {"artist":"Steel Pulse","date":"2026-04-18","time":"8:30 PM","price":"$30","soldOut":false}
+  ],
+  "53": [
+    {"artist":"Sonora Dinamita Tribute","date":"2026-03-14","time":"9:00 PM","price":"$20","soldOut":false},
+    {"artist":"Cumbia Night featuring DJ Sosa","date":"2026-03-28","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Mariachi Herencia de Mexico","date":"2026-04-11","time":"7:00 PM","price":"$25","soldOut":false}
+  ],
+  "54": [
+    {"artist":"Second City Revue: 'Ctrl+Alt+Delete Me'","date":"2026-03-06","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Second City Revue: 'Ctrl+Alt+Delete Me'","date":"2026-03-07","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Second City Revue: 'Ctrl+Alt+Delete Me'","date":"2026-03-13","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Second City Improv Brunch","date":"2026-03-15","time":"12:00 PM","price":"$25","soldOut":true}
+  ],
+  "55": [
+    {"artist":"Nate Bargatze","date":"2026-03-12","time":"8:00 PM","price":"$35","soldOut":true},
+    {"artist":"Mark Normand","date":"2026-03-19","time":"8:00 PM","price":"$30","soldOut":false},
+    {"artist":"Taylor Tomlinson","date":"2026-04-02","time":"8:00 PM","price":"$40","soldOut":true},
+    {"artist":"Sam Morril","date":"2026-04-16","time":"8:00 PM","price":"$28","soldOut":false}
+  ],
+  "56": [
+    {"artist":"Hasan Minhaj","date":"2026-03-13","time":"8:00 PM","price":"$45","soldOut":true},
+    {"artist":"Deon Cole","date":"2026-03-27","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Ronny Chieng","date":"2026-04-10","time":"8:00 PM","price":"$38","soldOut":false},
+    {"artist":"Nikki Glaser","date":"2026-04-24","time":"8:00 PM","price":"$42","soldOut":true}
+  ],
+  "57": [
+    {"artist":"iO Harold Night","date":"2026-03-05","time":"8:00 PM","price":"$8","soldOut":false},
+    {"artist":"iO Harold Night","date":"2026-03-12","time":"8:00 PM","price":"$8","soldOut":false},
+    {"artist":"Whirled News Tonight","date":"2026-03-09","time":"8:00 PM","price":"$10","soldOut":false},
+    {"artist":"Baby Wants Candy","date":"2026-03-14","time":"10:30 PM","price":"$15","soldOut":false}
+  ],
+  "58": [
+    {"artist":"Ken Vandermark / Nate Wooley Duo","date":"2026-03-06","time":"8:30 PM","price":"$15","soldOut":false},
+    {"artist":"Avreeayl Ra & the SunRa Arkestra Legacy","date":"2026-03-20","time":"8:30 PM","price":"$18","soldOut":false},
+    {"artist":"Douglas Ewart Inventions","date":"2026-04-03","time":"8:30 PM","price":"$15","soldOut":false},
+    {"artist":"Nicole Mitchell's Black Earth Ensemble","date":"2026-04-17","time":"8:30 PM","price":"$18","soldOut":false}
+  ],
+  "59": [
+    {"artist":"Vince Staples","date":"2026-03-14","time":"8:00 PM","price":"$38","soldOut":false},
+    {"artist":"Kim Gordon","date":"2026-03-28","time":"8:00 PM","price":"$35","soldOut":false},
+    {"artist":"Yaeji","date":"2026-04-11","time":"9:00 PM","price":"$30","soldOut":true},
+    {"artist":"Jungle","date":"2026-05-02","time":"8:00 PM","price":"$42","soldOut":false}
+  ],
+  "60": [
+    {"artist":"Melkbelly","date":"2026-03-07","time":"9:30 PM","price":"$10","soldOut":false},
+    {"artist":"Cafe Racer","date":"2026-03-21","time":"9:30 PM","price":"$8","soldOut":false},
+    {"artist":"Ganser","date":"2026-04-04","time":"9:30 PM","price":"$12","soldOut":false}
+  ],
+  "61": [
+    {"artist":"Steve Gunn","date":"2026-03-08","time":"8:00 PM","price":"$18","soldOut":false},
+    {"artist":"Mary Lattimore","date":"2026-03-22","time":"7:30 PM","price":"$20","soldOut":false},
+    {"artist":"Kevin Morby","date":"2026-04-05","time":"8:00 PM","price":"$22","soldOut":false}
+  ],
+  "62": [
+    {"artist":"Jeanne Lee Tribute Night","date":"2026-03-07","time":"9:00 PM","price":"$12","soldOut":false},
+    {"artist":"Tamara Jade","date":"2026-03-21","time":"9:00 PM","price":"$15","soldOut":false},
+    {"artist":"Matt Gold Trio","date":"2026-04-04","time":"9:00 PM","price":"$10","soldOut":false}
+  ],
+  "63": [
+    {"artist":"Dustin Laurenzi's Snaketime","date":"2026-03-09","time":"9:00 PM","price":"Free","soldOut":false},
+    {"artist":"Ben LaMar Gay","date":"2026-03-23","time":"9:00 PM","price":"Free","soldOut":false},
+    {"artist":"Tara Middleton","date":"2026-04-06","time":"9:00 PM","price":"Free","soldOut":false}
+  ],
+  "64": [
+    {"artist":"Eris Drew b2b Octo Octa","date":"2026-03-13","time":"10:00 PM","price":"$20","soldOut":true},
+    {"artist":"DJ Python","date":"2026-03-27","time":"10:00 PM","price":"$18","soldOut":false},
+    {"artist":"object blue","date":"2026-04-10","time":"10:00 PM","price":"$15","soldOut":false}
+  ],
+  "65": [
+    {"artist":"In-Store: DJ Richard","date":"2026-03-14","time":"3:00 PM","price":"Free","soldOut":false},
+    {"artist":"In-Store: Jamal Moss","date":"2026-03-28","time":"3:00 PM","price":"Free","soldOut":false},
+    {"artist":"In-Store: Chez Damier","date":"2026-04-11","time":"3:00 PM","price":"Free","soldOut":false}
+  ],
+  "66": [
+    {"artist":"Rob Clearfield Trio","date":"2026-03-06","time":"8:00 PM","price":"$15","soldOut":false},
+    {"artist":"Irene Diaz","date":"2026-03-20","time":"8:00 PM","price":"$18","soldOut":false},
+    {"artist":"Greg Ward's Rogue Parade","date":"2026-04-03","time":"8:00 PM","price":"$15","soldOut":false}
+  ],
+  "67": [
+    {"artist":"Ono","date":"2026-03-08","time":"9:00 PM","price":"$10","soldOut":false},
+    {"artist":"TV Priest","date":"2026-03-22","time":"9:00 PM","price":"$12","soldOut":false},
+    {"artist":"Earring","date":"2026-04-05","time":"9:00 PM","price":"$10","soldOut":false}
+  ],
+  "68": [
+    {"artist":"Tomeka Reid Quartet","date":"2026-03-10","time":"8:00 PM","price":"$15","soldOut":false},
+    {"artist":"Angel Bat Dawid","date":"2026-03-24","time":"8:00 PM","price":"$18","soldOut":false},
+    {"artist":"Bitchin Bajas","date":"2026-04-07","time":"8:00 PM","price":"$12","soldOut":false}
+  ],
+  "69": [
+    {"artist":"Jazz Brunch: Chicago Soul Revue","date":"2026-03-08","time":"11:00 AM","price":"$45","soldOut":false},
+    {"artist":"Friday Night Jazz: Paul Marinaro","date":"2026-03-13","time":"8:00 PM","price":"$30","soldOut":false},
+    {"artist":"Cabaret Night: Denise Tomasello","date":"2026-03-27","time":"8:00 PM","price":"$35","soldOut":false}
+  ],
+  "70": [
+    {"artist":"Olivia Rodrigo","date":"2026-04-18","time":"8:00 PM","price":"$75–$200","soldOut":true},
+    {"artist":"Dua Lipa","date":"2026-05-02","time":"8:00 PM","price":"$80–$225","soldOut":true},
+    {"artist":"Peso Pluma","date":"2026-05-16","time":"8:00 PM","price":"$65–$175","soldOut":false}
+  ]
+}

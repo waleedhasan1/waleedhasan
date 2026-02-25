@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
@@ -55,6 +55,26 @@ const NBAShortChartInline = dynamic(() => import('./components/NBAShortChartInli
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading shot chart...</div>
 })
 
+const StrudelInline = dynamic(() => import('./components/StrudelInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading Strudel...</div>
+})
+
+const RentMapInline = dynamic(() => import('./components/RentMapInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading rent map...</div>
+})
+
+const CompFinderInline = dynamic(() => import('./components/CompFinderInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading comp finder...</div>
+})
+
+const VenueMapInline = dynamic(() => import('./components/VenueMapInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading venue map...</div>
+})
+
 interface Window {
   title: string
   icon: string
@@ -73,6 +93,12 @@ export default function Portfolio() {
   const [windowZIndex, setWindowZIndex] = useState<Record<string, number>>({})
   const [highestZIndex, setHighestZIndex] = useState(100)
   const [isMobile, setIsMobile] = useState(false)
+  const [startMenuOpen, setStartMenuOpen] = useState(false)
+  const [taskbarOrder, setTaskbarOrder] = useState<string[]>([])
+  const [taskbarDrag, setTaskbarDrag] = useState<string | null>(null)
+  const [taskbarDragOver, setTaskbarDragOver] = useState<string | null>(null)
+  const startMenuRef = useRef<HTMLDivElement>(null)
+  const startBtnRef = useRef<HTMLButtonElement>(null)
 
   // Detect mobile on mount
   useEffect(() => {
@@ -112,6 +138,7 @@ export default function Portfolio() {
   const openWindow = (windowId: string) => {
     if (!openWindows.includes(windowId)) {
       setOpenWindows([...openWindows, windowId])
+      setTaskbarOrder(prev => prev.includes(windowId) ? prev : [...prev, windowId])
     }
     setMinimizedWindows(prev => prev.filter(id => id !== windowId))
     bringToFront(windowId)
@@ -119,6 +146,7 @@ export default function Portfolio() {
 
   const closeWindow = (windowId: string) => {
     setOpenWindows(openWindows.filter(id => id !== windowId))
+    setTaskbarOrder(prev => prev.filter(id => id !== windowId))
   }
 
   const minimizeWindow = (windowId: string) => {
@@ -200,11 +228,54 @@ export default function Portfolio() {
     }
   }, [dragging, offset])
 
+  // Close start menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        startMenuOpen &&
+        startMenuRef.current && !startMenuRef.current.contains(e.target as Node) &&
+        startBtnRef.current && !startBtnRef.current.contains(e.target as Node)
+      ) {
+        setStartMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [startMenuOpen])
+
+  const startMenuItems = [
+    { section: 'Programs', items: [
+      { id: 'ctamap', label: 'CTA Train Map' },
+      { id: 'albumbattle', label: 'Album Ranker' },
+      { id: 'nbashotchart', label: 'NBA Shot Chart' },
+      { id: 'rentmap', label: 'Chicago Rent Map' },
+      { id: 'compfinder', label: 'NYC Comp Finder' },
+      { id: 'venuemap', label: 'Chicago Venues' },
+      { id: 'radar', label: 'Weather Radar' },
+      { id: 'paint', label: 'Paint' },
+      { id: 'chat', label: 'Chat Room' },
+    ]},
+    { section: 'Games', items: [
+      { id: 'snake', label: 'Snake' },
+      { id: 'bikegame', label: 'Bike Game' },
+    ]},
+    { section: 'Media', items: [
+      { id: 'ipod', label: 'MP3 Player' },
+      { id: 'strudel', label: 'Strudel Live Coder' },
+      { id: 'leaderboard', label: 'Album Leaderboard' },
+    ]},
+  ]
+
+  const openFromStartMenu = (id: string) => {
+    openWindow(id)
+    setStartMenuOpen(false)
+  }
+
   const windows: Record<string, Window> = {
     about: {
       title: 'About Me',
       icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23C0C0C0' d='M2 2h28v28H2z'/%3E%3Cpath fill='%23000080' d='M4 4h24v24H4z'/%3E%3Ccircle fill='%23FFCC99' cx='16' cy='12' r='4'/%3E%3Cpath fill='%23FFCC99' d='M10 20h12v6H10z'/%3E%3Cpath fill='%23FFF' d='M5 5h22v1H5zm0 21h22v1H5zM5 5h1v22H5zm21 0h1v22h-1z'/%3E%3C/svg%3E",
-      pos: { top: 100, left: 100 },
+      pos: { top: 60, left: 300 },
       size: { width: 500, height: 600 },
       content: (
         <div style={{ fontFamily: 'Perfect DOS VGA 437, monospace', fontSize: 16, color: '#000', background: '#008080', padding: 16, letterSpacing: '0.5px', height: '100%', overflowY: 'auto' }}>
@@ -409,6 +480,50 @@ export default function Portfolio() {
       content: (
         <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
           <NBAShortChartInline />
+        </div>
+      )
+    },
+    strudel: {
+      title: 'Strudel Live Coder',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23222' width='32' height='32' rx='2'/%3E%3Crect fill='%23333' x='2' y='2' width='28' height='28' rx='1'/%3E%3Cpath d='M6 20 L10 12 L14 18 L18 8 L22 16 L26 10' stroke='%2300FF88' stroke-width='2' fill='none'/%3E%3Ccircle fill='%23FF00FF' cx='8' cy='24' r='2'/%3E%3Ccircle fill='%2300FFFF' cx='16' cy='24' r='2'/%3E%3Ccircle fill='%23FFFF00' cx='24' cy='24' r='2'/%3E%3Ctext x='16' y='7' text-anchor='middle' fill='%2300FF88' font-size='5' font-family='monospace'%3E&gt;_%3C/text%3E%3C/svg%3E",
+      pos: { top: 70, left: 180 },
+      size: { width: 700, height: 550 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <StrudelInline />
+        </div>
+      )
+    },
+    rentmap: {
+      title: 'Chicago Rent Map',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23C0C0C0' width='32' height='32' rx='2'/%3E%3Crect fill='%232b83ba' x='4' y='20' width='5' height='8'/%3E%3Crect fill='%23abdda4' x='10' y='16' width='5' height='12'/%3E%3Crect fill='%23fdae61' x='17' y='10' width='5' height='18'/%3E%3Crect fill='%23d7191c' x='23' y='4' width='5' height='24'/%3E%3Cpath fill='%23333' d='M2 28h28v2H2z'/%3E%3C/svg%3E",
+      pos: { top: 60, left: 150 },
+      size: { width: 900, height: 700 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <RentMapInline />
+        </div>
+      )
+    },
+    compfinder: {
+      title: 'NYC Comp Finder',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23C0C0C0' width='32' height='32' rx='2'/%3E%3Crect fill='%23000080' x='3' y='3' width='26' height='26' rx='1'/%3E%3Crect fill='%23FFF' x='5' y='5' width='22' height='22'/%3E%3Crect fill='%23E8E8E8' x='5' y='5' width='22' height='4'/%3E%3Ccircle fill='%23FFD700' cx='12' cy='16' r='3' stroke='%23000' stroke-width='1'/%3E%3Ccircle fill='%232e7d32' cx='20' cy='12' r='2' stroke='%23000' stroke-width='0.5'/%3E%3Ccircle fill='%232e7d32' cx='22' cy='20' r='2' stroke='%23000' stroke-width='0.5'/%3E%3Ccircle fill='%23f9a825' cx='8' cy='22' r='2' stroke='%23000' stroke-width='0.5'/%3E%3Cpath stroke='%23666' stroke-width='0.8' stroke-dasharray='2 2' d='M12 16L20 12M12 16L22 20M12 16L8 22'/%3E%3C/svg%3E",
+      pos: { top: 50, left: 120 },
+      size: { width: 1000, height: 700 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <CompFinderInline />
+        </div>
+      )
+    },
+    venuemap: {
+      title: 'Chicago Venues',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23C0C0C0' width='32' height='32' rx='2'/%3E%3Crect fill='%23000080' x='3' y='3' width='26' height='26' rx='1'/%3E%3Crect fill='%23FFF' x='5' y='5' width='22' height='22'/%3E%3Ccircle fill='%23DC143C' cx='12' cy='12' r='2.5'/%3E%3Ccircle fill='%23DAA520' cx='20' cy='10' r='2.5'/%3E%3Ccircle fill='%238B00FF' cx='10' cy='20' r='2.5'/%3E%3Ccircle fill='%23FF6600' cx='22' cy='18' r='2.5'/%3E%3Ccircle fill='%2332CD32' cx='16' cy='22' r='2.5'/%3E%3Ccircle fill='%23000080' cx='16' cy='15' r='2.5'/%3E%3C/svg%3E",
+      pos: { top: 50, left: 120 },
+      size: { width: 1000, height: 700 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <VenueMapInline />
         </div>
       )
     },
@@ -755,18 +870,19 @@ export default function Portfolio() {
 
   const desktopIcons = [
     { id: 'about', label: 'About Me', icon: windows.about.icon },
-    { id: 'ctamap', label: 'CTA Map', icon: windows.ctamap.icon },
-    { id: 'radar', label: 'Weather Radar', icon: windows.radar.icon },
-    { id: 'albumbattle', label: 'Album Ranker', icon: windows.albumbattle.icon },
-    { id: 'paint', label: 'Paint', icon: windows.paint.icon },
-    { id: 'chat', label: 'Chat Room', icon: windows.chat.icon },
-    { id: 'snake', label: 'Snake Game', icon: windows.snake.icon },
+    { id: 'rentmap', label: 'Rent Map', icon: windows.rentmap.icon },
+    { id: 'compfinder', label: 'NYC Comps', icon: windows.compfinder.icon },
+    { id: 'venuemap', label: 'Venues', icon: windows.venuemap.icon },
     { id: 'bikegame', label: 'Bike Game', icon: windows.bikegame.icon },
-    { id: 'ipod', label: 'MP3 Player', icon: windows.ipod.icon },
     { id: 'nbashotchart', label: 'NBA Shots', icon: windows.nbashotchart.icon },
+    { id: 'albumbattle', label: 'Album Ranker', icon: windows.albumbattle.icon },
+    { id: 'radar', label: 'Weather Radar', icon: windows.radar.icon },
+    { id: 'ctamap', label: 'CTA Map', icon: windows.ctamap.icon },
+    { id: 'snake', label: 'Snake Game', icon: windows.snake.icon },
+    { id: 'strudel', label: 'Strudel', icon: windows.strudel.icon },
     { id: 'projects', label: 'Projects', icon: windows.projects.icon },
     { id: 'skills', label: 'Skills', icon: windows.skills.icon },
-    { id: 'contact', label: 'Contact', icon: windows.contact.icon }
+    { id: 'contact', label: 'Contact', icon: windows.contact.icon },
   ]
 
   return (
@@ -859,22 +975,153 @@ export default function Portfolio() {
               <button className="window-button close" onClick={() => closeWindow(id)}>×</button>
             </div>
           </div>
-          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame' || id === 'nbashotchart') ? 0 : 16 }}>
+          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame' || id === 'nbashotchart' || id === 'strudel' || id === 'rentmap' || id === 'compfinder' || id === 'venuemap') ? 0 : 16 }}>
             {win.content}
           </div>
         </div>
       ))}
 
-      <div className="taskbar">
-        <button className="start-button">
-          <img className="start-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M3 3h8v8H3zm0 10h8v8H3zm10-10h8v8h-8zm0 10h8v8h-8z'/%3E%3C/svg%3E" alt="Start" />
+      <div
+        className="taskbar"
+        onDragOver={(e) => { if (taskbarDrag) { e.preventDefault(); e.dataTransfer.dropEffect = 'move' } }}
+        onDrop={(e) => {
+          if (taskbarDrag) {
+            e.preventDefault()
+            setTaskbarOrder(prev => {
+              const next = prev.filter(x => x !== taskbarDrag)
+              next.push(taskbarDrag)
+              return next
+            })
+            setTaskbarDrag(null)
+            setTaskbarDragOver(null)
+          }
+        }}
+      >
+        {/* Start Menu */}
+        {startMenuOpen && (
+          <div ref={startMenuRef} className="start-menu">
+            <div className="start-menu-sidebar">
+              <span className="start-menu-sidebar-text">Waleed<b>95</b></span>
+            </div>
+            <div className="start-menu-content">
+              {startMenuItems.map((section, si) => (
+                <div key={section.section}>
+                  {si > 0 && <div className="start-menu-divider" />}
+                  <div className="start-menu-section-label">{section.section}</div>
+                  {section.items.map(item => (
+                    <div
+                      key={item.id}
+                      className="start-menu-item"
+                      onClick={() => openFromStartMenu(item.id)}
+                    >
+                      <img src={windows[item.id]?.icon || ''} alt="" className="start-menu-item-icon" />
+                      <span>{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <div className="start-menu-divider" />
+              <div
+                className="start-menu-item"
+                onClick={() => openFromStartMenu('about')}
+              >
+                <img src={windows.about.icon} alt="" className="start-menu-item-icon" />
+                <span>About Me</span>
+              </div>
+              <div
+                className="start-menu-item"
+                onClick={() => openFromStartMenu('skills')}
+              >
+                <img src={windows.skills.icon} alt="" className="start-menu-item-icon" />
+                <span>Skills</span>
+              </div>
+              <div
+                className="start-menu-item"
+                onClick={() => openFromStartMenu('projects')}
+              >
+                <img src={windows.projects.icon} alt="" className="start-menu-item-icon" />
+                <span>Projects</span>
+              </div>
+              <div
+                className="start-menu-item"
+                onClick={() => openFromStartMenu('contact')}
+              >
+                <img src={windows.contact.icon} alt="" className="start-menu-item-icon" />
+                <span>Contact</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <button
+          ref={startBtnRef}
+          className={`start-button ${startMenuOpen ? 'start-button-active' : ''}`}
+          onClick={() => setStartMenuOpen(!startMenuOpen)}
+        >
+          <img className="start-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect fill='%23FF0000' x='2' y='2' width='9' height='9'/%3E%3Crect fill='%2300FF00' x='13' y='2' width='9' height='9'/%3E%3Crect fill='%230000FF' x='2' y='13' width='9' height='9'/%3E%3Crect fill='%23FFFF00' x='13' y='13' width='9' height='9'/%3E%3C/svg%3E" alt="Start" />
           <span>Start</span>
         </button>
-        <div className="taskbar-items">
-          {openWindows.map(id => (
+        <div
+          className="taskbar-items"
+          onDragOver={(e) => {
+            e.preventDefault()
+            e.dataTransfer.dropEffect = 'move'
+          }}
+          onDrop={(e) => {
+            e.preventDefault()
+            if (taskbarDrag) {
+              setTaskbarOrder(prev => {
+                const next = prev.filter(x => x !== taskbarDrag)
+                next.push(taskbarDrag)
+                return next
+              })
+              setTaskbarDrag(null)
+              setTaskbarDragOver(null)
+            }
+          }}
+        >
+          {taskbarOrder.filter(id => openWindows.includes(id)).map(id => (
             <div
               key={id}
               className={`taskbar-item ${minimizedWindows.includes(id) ? '' : 'active'}`}
+              draggable
+              onDragStart={(e) => {
+                setTaskbarDrag(id)
+                e.dataTransfer.effectAllowed = 'move'
+                if (e.currentTarget instanceof HTMLElement) {
+                  e.currentTarget.style.opacity = '0.5'
+                }
+              }}
+              onDragEnd={(e) => {
+                setTaskbarDrag(null)
+                setTaskbarDragOver(null)
+                if (e.currentTarget instanceof HTMLElement) {
+                  e.currentTarget.style.opacity = '1'
+                }
+              }}
+              onDragOver={(e) => {
+                e.preventDefault()
+                e.dataTransfer.dropEffect = 'move'
+                if (taskbarDrag && taskbarDrag !== id) {
+                  setTaskbarDragOver(id)
+                }
+              }}
+              onDragLeave={() => {
+                if (taskbarDragOver === id) setTaskbarDragOver(null)
+              }}
+              onDrop={(e) => {
+                e.preventDefault()
+                if (taskbarDrag && taskbarDrag !== id) {
+                  setTaskbarOrder(prev => {
+                    const next = prev.filter(x => x !== taskbarDrag)
+                    const dropIdx = next.indexOf(id)
+                    next.splice(dropIdx, 0, taskbarDrag)
+                    return next
+                  })
+                }
+                setTaskbarDrag(null)
+                setTaskbarDragOver(null)
+              }}
               onClick={() => {
                 if (minimizedWindows.includes(id)) {
                   restoreWindow(id)
@@ -882,6 +1129,10 @@ export default function Portfolio() {
                 } else {
                   minimizeWindow(id)
                 }
+              }}
+              style={{
+                borderLeft: taskbarDragOver === id ? '3px solid #000080' : undefined,
+                cursor: 'grab',
               }}
             >
               <img src={windows[id].icon} alt="" />
