@@ -75,6 +75,11 @@ const VenueMapInline = dynamic(() => import('./components/VenueMapInline'), {
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading venue map...</div>
 })
 
+const EggPriceMapInline = dynamic(() => import('./components/EggPriceMapInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading egg prices...</div>
+})
+
 interface Window {
   title: string
   icon: string
@@ -251,6 +256,7 @@ export default function Portfolio() {
       { id: 'rentmap', label: 'Chicago Rent Map' },
       { id: 'compfinder', label: 'NYC Comp Finder' },
       { id: 'venuemap', label: 'Chicago Venues' },
+      { id: 'eggprices', label: 'Egg Price Map' },
       { id: 'radar', label: 'Weather Radar' },
       { id: 'paint', label: 'Paint' },
       { id: 'chat', label: 'Chat Room' },
@@ -527,6 +533,17 @@ export default function Portfolio() {
         </div>
       )
     },
+    eggprices: {
+      title: 'Egg Price Map',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23C0C0C0' width='32' height='32' rx='2'/%3E%3Crect fill='%23228B22' x='3' y='3' width='26' height='26' rx='1'/%3E%3Cellipse fill='%23FFFDE8' cx='11' cy='14' rx='4' ry='5'/%3E%3Cellipse fill='%23FFF5D0' cx='21' cy='14' rx='4' ry='5'/%3E%3Cellipse fill='%23FFECB0' cx='16' cy='20' rx='4' ry='5'/%3E%3Ctext x='16' y='10' text-anchor='middle' fill='%23FFF' font-size='7' font-weight='bold' font-family='Arial'%3E$%3C/text%3E%3C/svg%3E",
+      pos: { top: 50, left: 120 },
+      size: { width: 1000, height: 700 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <EggPriceMapInline />
+        </div>
+      )
+    },
     projects: {
       title: 'Projects',
       icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23FFCC00' d='M3 8h10l2 2h14v16H3z'/%3E%3Cpath fill='%23FFE066' d='M3 8h10l2 2h14v3H3z'/%3E%3Cpath fill='%23CC9900' d='M3 25h26v1H3z'/%3E%3Crect fill='%23FFF' x='8' y='14' width='16' height='2'/%3E%3Crect fill='%23FFF' x='8' y='17' width='12' height='2'/%3E%3Crect fill='%23FFF' x='8' y='20' width='14' height='2'/%3E%3C/svg%3E",
@@ -557,40 +574,91 @@ export default function Portfolio() {
               Projects
             </div>
             
-            <div className="project-card" onClick={() => openWindow('ctamap')} style={{ cursor: 'pointer', marginBottom: 12 }}>
-              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>CTA Train Tracker</h4>
-              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Real-time Chicago transit system tracker showing train arrivals and departures!</p>
+            <div className="project-card" onClick={() => openWindow('compfinder')} style={{ cursor: 'pointer', marginBottom: 12 }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>NYC Comparable Property Finder</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Interactive tool for identifying comparable properties across NYC using public sales data. Supports address search, price-range filtering by borough, and automated comp matching within +/-10% of sale price — similar to assessor workflows used in property valuation.</p>
               <div style={{ marginTop: 8 }}>
                 <span className="skill-tag">Next.js</span>
-                <span className="skill-tag">React</span>
-                <span className="skill-tag">Leaflet</span>
-                <span className="skill-tag">CTA API</span>
-                <span className="skill-tag">Python</span>
-                <span className="skill-tag">Pandas</span>
-              </div>
-            </div>
-            
-            <div className="project-card" onClick={() => openWindow('albumbattle')} style={{ cursor: 'pointer', marginBottom: 12 }}>
-              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>Album Ranker</h4>
-              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Battle your favorite albums and see which ones rank highest using ELO ratings!</p>
-              <div style={{ marginTop: 8 }}>
-                <span className="skill-tag">Next.js</span>
-                <span className="skill-tag">React</span>
-                <span className="skill-tag">ELO Algorithm</span>
+                <span className="skill-tag">MapLibre GL</span>
                 <span className="skill-tag">PostgreSQL</span>
-                <span className="skill-tag">Python</span>
-                <span className="skill-tag">Pandas</span>
-                <span className="skill-tag">Beautiful Soup</span>
+                <span className="skill-tag">SQL</span>
+                <span className="skill-tag">REST API</span>
+                <span className="skill-tag">Geospatial Data</span>
               </div>
             </div>
-            
-            <div className="project-card" onClick={() => openWindow('ipod')} style={{ cursor: 'pointer' }}>
-              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>Digital MP3 Player</h4>
-              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>A retro MP3 player that lets you upload and play your own music files!</p>
+
+            <div className="project-card" onClick={() => openWindow('rentmap')} style={{ cursor: 'pointer', marginBottom: 12 }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>Chicago Rent Map</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Choropleth map visualizing median rent by community area using GeoJSON boundary data. Built reproducible data pipeline to clean, transform, and join census rent estimates with geographic boundaries for spatial analysis.</p>
               <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">MapLibre GL</span>
+                <span className="skill-tag">GeoJSON</span>
+                <span className="skill-tag">Data Visualization</span>
+                <span className="skill-tag">Python</span>
+                <span className="skill-tag">Pandas</span>
+                <span className="skill-tag">Geospatial Analysis</span>
+              </div>
+            </div>
+
+            <div className="project-card" onClick={() => openWindow('eggprices')} style={{ cursor: 'pointer', marginBottom: 12 }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>Grocery Price Comparison Map</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Geospatial price comparison dashboard across 60 Jewel-Osco locations in Chicagoland. Color-coded markers by price tier, sortable store rankings, and per-store detail cards with Google Street View. Tracks eggs and milk with subtype filtering.</p>
+              <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">MapLibre GL</span>
+                <span className="skill-tag">Google Maps API</span>
+                <span className="skill-tag">Data Analysis</span>
                 <span className="skill-tag">React</span>
-                <span className="skill-tag">Web Audio API</span>
-                <span className="skill-tag">File Upload</span>
+                <span className="skill-tag">Geospatial Data</span>
+              </div>
+            </div>
+
+            <div className="project-card" onClick={() => openWindow('venuemap')} style={{ cursor: 'pointer', marginBottom: 12 }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>Chicago Music Venue Map</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Interactive map of 70 Chicago live music venues with genre-based classification, curated event listings, and Google Street View integration. Multi-filter system with genre toggles, neighborhood dropdown, and text search across a geocoded dataset.</p>
+              <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">MapLibre GL</span>
+                <span className="skill-tag">Google Maps API</span>
+                <span className="skill-tag">GeoJSON</span>
+                <span className="skill-tag">Data Curation</span>
+                <span className="skill-tag">React</span>
+              </div>
+            </div>
+
+            <div className="project-card" onClick={() => openWindow('ctamap')} style={{ cursor: 'pointer', marginBottom: 12 }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>CTA Real-Time Train Tracker</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Real-time transit visualization querying the CTA public API for live train positions and arrival predictions. Displays routes as GeoJSON polylines with animated train markers updated every 30 seconds.</p>
+              <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">Public API</span>
+                <span className="skill-tag">Leaflet</span>
+                <span className="skill-tag">GeoJSON</span>
+                <span className="skill-tag">Python</span>
+                <span className="skill-tag">Pandas</span>
+                <span className="skill-tag">Real-Time Data</span>
+              </div>
+            </div>
+
+            <div className="project-card" onClick={() => openWindow('albumbattle')} style={{ cursor: 'pointer', marginBottom: 12 }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>Album Ranker (ELO Rating System)</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Full-stack ranking application using the ELO algorithm with PostgreSQL persistence. Web-scraped album metadata, built reproducible data ingestion pipeline, and designed a leaderboard dashboard with statistical rankings.</p>
+              <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">PostgreSQL</span>
+                <span className="skill-tag">SQL</span>
+                <span className="skill-tag">Python</span>
+                <span className="skill-tag">Beautiful Soup</span>
+                <span className="skill-tag">Web Scraping</span>
+                <span className="skill-tag">Git</span>
+              </div>
+            </div>
+
+            <div className="project-card" onClick={() => openWindow('nbashotchart')} style={{ cursor: 'pointer' }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#000080' }}>NBA Shot Chart Visualizer</h4>
+              <p style={{ margin: '0 0 8px 0', lineHeight: 1.6 }}>Statistical shot chart tool querying the NBA stats API. Transforms raw shot coordinate data into spatial visualizations on a court diagram with made/missed filtering, player search, and season selection.</p>
+              <div style={{ marginTop: 8 }}>
+                <span className="skill-tag">Public API</span>
+                <span className="skill-tag">Data Visualization</span>
+                <span className="skill-tag">Canvas API</span>
+                <span className="skill-tag">React</span>
+                <span className="skill-tag">Statistical Analysis</span>
               </div>
             </div>
           </div>
@@ -873,6 +941,7 @@ export default function Portfolio() {
     { id: 'rentmap', label: 'Rent Map', icon: windows.rentmap.icon },
     { id: 'compfinder', label: 'NYC Comps', icon: windows.compfinder.icon },
     { id: 'venuemap', label: 'Venues', icon: windows.venuemap.icon },
+    { id: 'eggprices', label: 'Egg Prices', icon: windows.eggprices.icon },
     { id: 'bikegame', label: 'Bike Game', icon: windows.bikegame.icon },
     { id: 'nbashotchart', label: 'NBA Shots', icon: windows.nbashotchart.icon },
     { id: 'albumbattle', label: 'Album Ranker', icon: windows.albumbattle.icon },
@@ -975,7 +1044,7 @@ export default function Portfolio() {
               <button className="window-button close" onClick={() => closeWindow(id)}>×</button>
             </div>
           </div>
-          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame' || id === 'nbashotchart' || id === 'strudel' || id === 'rentmap' || id === 'compfinder' || id === 'venuemap') ? 0 : 16 }}>
+          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame' || id === 'nbashotchart' || id === 'strudel' || id === 'rentmap' || id === 'compfinder' || id === 'venuemap' || id === 'eggprices') ? 0 : 16 }}>
             {win.content}
           </div>
         </div>
