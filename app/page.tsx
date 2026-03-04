@@ -80,6 +80,11 @@ const EggPriceMapInline = dynamic(() => import('./components/EggPriceMapInline')
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading egg prices...</div>
 })
 
+const GhostBusMapInline = dynamic(() => import('./components/GhostBusMapInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading ghost bus map...</div>
+})
+
 interface Window {
   title: string
   icon: string
@@ -257,6 +262,7 @@ export default function Portfolio() {
       { id: 'compfinder', label: 'NYC Comp Finder' },
       { id: 'venuemap', label: 'Chicago Venues' },
       { id: 'eggprices', label: 'Egg Price Map' },
+      { id: 'ghostbuses', label: 'Ghost Bus Map' },
       { id: 'radar', label: 'Weather Radar' },
       { id: 'paint', label: 'Paint' },
       { id: 'chat', label: 'Chat Room' },
@@ -541,6 +547,17 @@ export default function Portfolio() {
       content: (
         <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
           <EggPriceMapInline />
+        </div>
+      )
+    },
+    ghostbuses: {
+      title: 'Ghost Bus Map',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23C0C0C0' width='32' height='32' rx='2'/%3E%3Crect fill='%231a0a2e' x='3' y='3' width='26' height='26' rx='1'/%3E%3Cpath d='M16 6c-5 0-8 4-8 9v9h3v-3h2v3h2v-3h2v3h2v-3h2v3h3v-9c0-5-3-9-8-9z' fill='%236B21A8' opacity='0.9'/%3E%3Ccircle cx='13' cy='14' r='2' fill='%23FFF'/%3E%3Ccircle cx='19' cy='14' r='2' fill='%23FFF'/%3E%3Cellipse cx='16' cy='18' rx='2' ry='1' fill='%23FFF' opacity='0.5'/%3E%3C/svg%3E",
+      pos: { top: 50, left: 140 },
+      size: { width: 1000, height: 700 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <GhostBusMapInline />
         </div>
       )
     },
@@ -942,6 +959,7 @@ export default function Portfolio() {
     { id: 'compfinder', label: 'NYC Comps', icon: windows.compfinder.icon },
     { id: 'venuemap', label: 'Venues', icon: windows.venuemap.icon },
     { id: 'eggprices', label: 'Egg Prices', icon: windows.eggprices.icon },
+    { id: 'ghostbuses', label: 'Ghost Buses', icon: windows.ghostbuses.icon },
     { id: 'bikegame', label: 'Bike Game', icon: windows.bikegame.icon },
     { id: 'nbashotchart', label: 'NBA Shots', icon: windows.nbashotchart.icon },
     { id: 'albumbattle', label: 'Album Ranker', icon: windows.albumbattle.icon },
@@ -1044,7 +1062,7 @@ export default function Portfolio() {
               <button className="window-button close" onClick={() => closeWindow(id)}>×</button>
             </div>
           </div>
-          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame' || id === 'nbashotchart' || id === 'strudel' || id === 'rentmap' || id === 'compfinder' || id === 'venuemap' || id === 'eggprices') ? 0 : 16 }}>
+          <div className="window-content" style={{ padding: (id === 'ctamap' || id === 'albumbattle' || id === 'leaderboard' || id === 'paint' || id === 'chat' || id === 'ipod' || id === 'snake' || id === 'radar' || id === 'bikegame' || id === 'nbashotchart' || id === 'strudel' || id === 'rentmap' || id === 'compfinder' || id === 'venuemap' || id === 'eggprices' || id === 'ghostbuses') ? 0 : 16 }}>
             {win.content}
           </div>
         </div>
