@@ -900,32 +900,10 @@ export default function Portfolio() {
                 fontWeight: 'bold',
                 fontFamily: 'MS Sans Serif, Arial, sans-serif'
               }}>
-                your.email@example.com
+                waleed.1.hasan@gmail.com
               </div>
             </div>
 
-            {/* Phone */}
-            <div style={{
-              marginBottom: 24
-            }}>
-              <div style={{
-                color: '#000',
-                fontSize: 11,
-                fontWeight: 'bold',
-                marginBottom: 6,
-                textTransform: 'uppercase'
-              }}>
-                Phone:
-              </div>
-              <div style={{
-                color: '#000080',
-                fontSize: 14,
-                fontWeight: 'bold',
-                fontFamily: 'MS Sans Serif, Arial, sans-serif'
-              }}>
-                (123) 456-7890
-              </div>
-            </div>
 
             {/* Location */}
             <div>
