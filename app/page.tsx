@@ -90,6 +90,11 @@ const SeventeenSquaresInline = dynamic(() => import('./components/SeventeenSquar
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading 17 squares...</div>
 })
 
+const NeighborhoodFinderInline = dynamic(() => import('./components/NeighborhoodFinderInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading neighborhood finder...</div>
+})
+
 interface Window {
   title: string
   icon: string
@@ -555,6 +560,17 @@ export default function Portfolio() {
         </div>
       )
     },
+    neighborhoodfinder: {
+      title: 'Where Should I Live?',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23C0C0C0' width='32' height='32' rx='2'/%3E%3Crect fill='%23f0f8f8' x='3' y='3' width='26' height='26' rx='1'/%3E%3Cpath fill='%2300CED1' d='M3 18h26v11H3z'/%3E%3Cpath fill='%23FFD700' d='M16 5l-6 9h12z'/%3E%3Crect fill='%23c10070' x='15' y='14' width='2' height='6'/%3E%3Ccircle fill='%236A0DAD' cx='10' cy='22' r='2'/%3E%3Ccircle fill='%23008B8B' cx='16' cy='24' r='2'/%3E%3Ccircle fill='%23FFD700' cx='22' cy='22' r='2'/%3E%3C/svg%3E",
+      pos: { top: 50, left: 100 },
+      size: { width: 850, height: 600 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0 }}>
+          <NeighborhoodFinderInline />
+        </div>
+      )
+    },
     seventeensquares: {
       title: '17 Squares',
       icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23001a1a' width='32' height='32' rx='2'/%3E%3Crect fill='none' stroke='%23ffffff' stroke-width='1.5' x='5' y='5' width='22' height='22'/%3E%3Crect fill='%23e63946' x='7' y='7' width='5' height='5'/%3E%3Crect fill='%23f4a261' x='13' y='7' width='5' height='5'/%3E%3Crect fill='%23e9c46a' x='19' y='7' width='5' height='5'/%3E%3Crect fill='%232a9d8f' x='7' y='13' width='5' height='5'/%3E%3Crect fill='%238338ec' x='13' y='13' width='5' height='5'/%3E%3Crect fill='%233a86ff' x='19' y='13' width='5' height='5'/%3E%3Crect fill='%23ff006e' x='7' y='19' width='5' height='5'/%3E%3Crect fill='%23fb5607' x='13' y='19' width='5' height='5'/%3E%3Crect fill='%23ffbe0b' x='19' y='19' width='5' height='5'/%3E%3Crect fill='%23c0392b' x='4' y='3' width='24' height='2'/%3E%3C/svg%3E",
@@ -962,6 +978,7 @@ export default function Portfolio() {
     { id: 'snake', label: 'Snake Game', icon: windows.snake.icon },
     { id: 'strudel', label: 'Strudel', icon: windows.strudel.icon },
     { id: 'seventeensquares', label: '17 Squares', icon: windows.seventeensquares.icon },
+    { id: 'neighborhoodfinder', label: 'Where to Live', icon: windows.neighborhoodfinder.icon },
     { id: 'projects', label: 'Projects', icon: windows.projects.icon },
     { id: 'skills', label: 'Skills', icon: windows.skills.icon },
     { id: 'contact', label: 'Contact', icon: windows.contact.icon },
