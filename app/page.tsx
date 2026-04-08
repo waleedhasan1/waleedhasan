@@ -85,6 +85,11 @@ const GhostBusMapInline = dynamic(() => import('./components/GhostBusMapInline')
   loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading ghost bus map...</div>
 })
 
+const SeventeenSquaresInline = dynamic(() => import('./components/SeventeenSquaresInline'), {
+  ssr: false,
+  loading: () => <div style={{ padding: 20, textAlign: 'center' }}>Loading 17 squares...</div>
+})
+
 interface Window {
   title: string
   icon: string
@@ -550,6 +555,17 @@ export default function Portfolio() {
         </div>
       )
     },
+    seventeensquares: {
+      title: '17 Squares',
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23001a1a' width='32' height='32' rx='2'/%3E%3Crect fill='none' stroke='%23ffffff' stroke-width='1.5' x='5' y='5' width='22' height='22'/%3E%3Crect fill='%23e63946' x='7' y='7' width='5' height='5'/%3E%3Crect fill='%23f4a261' x='13' y='7' width='5' height='5'/%3E%3Crect fill='%23e9c46a' x='19' y='7' width='5' height='5'/%3E%3Crect fill='%232a9d8f' x='7' y='13' width='5' height='5'/%3E%3Crect fill='%238338ec' x='13' y='13' width='5' height='5'/%3E%3Crect fill='%233a86ff' x='19' y='13' width='5' height='5'/%3E%3Crect fill='%23ff006e' x='7' y='19' width='5' height='5'/%3E%3Crect fill='%23fb5607' x='13' y='19' width='5' height='5'/%3E%3Crect fill='%23ffbe0b' x='19' y='19' width='5' height='5'/%3E%3Crect fill='%23c0392b' x='4' y='3' width='24' height='2'/%3E%3C/svg%3E",
+      pos: { top: 60, left: 180 },
+      size: { width: 600, height: 800 },
+      content: (
+        <div style={{ height: '100%', width: '100%', padding: 0, margin: 0, position: 'relative' }}>
+          <SeventeenSquaresInline />
+        </div>
+      )
+    },
     ghostbuses: {
       title: 'Ghost Bus Map',
       icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23C0C0C0' width='32' height='32' rx='2'/%3E%3Crect fill='%231a0a2e' x='3' y='3' width='26' height='26' rx='1'/%3E%3Cpath d='M16 6c-5 0-8 4-8 9v9h3v-3h2v3h2v-3h2v3h2v-3h2v3h3v-9c0-5-3-9-8-9z' fill='%236B21A8' opacity='0.9'/%3E%3Ccircle cx='13' cy='14' r='2' fill='%23FFF'/%3E%3Ccircle cx='19' cy='14' r='2' fill='%23FFF'/%3E%3Cellipse cx='16' cy='18' rx='2' ry='1' fill='%23FFF' opacity='0.5'/%3E%3C/svg%3E",
@@ -945,6 +961,7 @@ export default function Portfolio() {
     { id: 'ctamap', label: 'CTA Map', icon: windows.ctamap.icon },
     { id: 'snake', label: 'Snake Game', icon: windows.snake.icon },
     { id: 'strudel', label: 'Strudel', icon: windows.strudel.icon },
+    { id: 'seventeensquares', label: '17 Squares', icon: windows.seventeensquares.icon },
     { id: 'projects', label: 'Projects', icon: windows.projects.icon },
     { id: 'skills', label: 'Skills', icon: windows.skills.icon },
     { id: 'contact', label: 'Contact', icon: windows.contact.icon },
