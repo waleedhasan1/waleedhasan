@@ -386,7 +386,6 @@ export default function Portfolio() {
               Things I Have Done
             </div>
             <ul style={{ margin: '0', paddingLeft: 24, lineHeight: '2', color: '#000' }}>
-              <li style={{ marginBottom: 10 }}>Helped my friends at Kaleida health automate a pump report system, allowing a weekly meeting to be removed, saving over 50 staff members hours of time</li>
               <li style={{ marginBottom: 10 }}>Helped my friends at the Electronic Visualization Facility create automated data collection, sorting, cleaning system, that scraped google scholar pages of researchers, allowing for automatic bias detection</li>
               <li style={{ marginBottom: 10 }}>Helped my friends at the Bonfire Newspaper create an online polling and data tracking system</li>
               <li style={{ marginBottom: 10 }}>Helped my friends at Charred Fork set up their initial website for their lovely bbq restaurant</li>
