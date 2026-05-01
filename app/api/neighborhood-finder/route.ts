@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 import { findRelevantNeighborhoods, type ChatMessage } from '../../lib/neighborhoodFinder'
 
-const client = new OpenAI()
+export const dynamic = 'force-dynamic'
 
 function buildSystemPrompt(neighborhoodNames: string[], dataBlock: string): string {
   return `You are a concise Chicago neighborhood expert. You help people find where to live based on real data.
@@ -51,6 +51,8 @@ export async function POST(request: Request) {
 
   const neighborhoodNames = result.neighborhoods.map(n => n.name)
   const systemPrompt = buildSystemPrompt(neighborhoodNames, dataBlock)
+
+  const client = new OpenAI()
 
   const topPicksData = result.topPicks
     .map(name => {
